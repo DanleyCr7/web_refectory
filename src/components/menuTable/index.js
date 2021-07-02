@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import TextField from '@material-ui/core/TextField';
-
+import { format } from 'date-fns'
 import api from '../../services/api';
 import settingsText from '../../config/settingsText';
+import { MessageUi } from '../messageUI'
+import {date, month, year} from './date'
 
 const MenuTable = _ => {
+  const [message, setMessage]= useState(false);
   const apiGetData = async _ => {
     try {
       const resp = await api.get('/menu');
@@ -22,10 +25,28 @@ const MenuTable = _ => {
       label={label}
       multiline
       rows='4'
+      InputLabelProps={{
+        required: true
+      }}
       value={props.value}
       onChange={onChange(props)}
       margin='normal'
       variant='filled'
+    />
+  );
+  const materialDateInput = `${year}-${month}-${date}`; 
+
+  const DateTextField = ({ props, label, onChange }) => (
+    <TextField
+    id="date"
+    label={label}
+    type="date"
+    defaultValue={materialDateInput} // Today's Date being used as default
+    InputLabelProps={{
+      shrink: true,
+      required: true
+    }}
+    onChange={onChange(props)}
     />
   );
 
@@ -38,7 +59,7 @@ const MenuTable = _ => {
             label='Título' 
             onChange={handleTitle}  
           />
-        ) 
+        ),
       },
       { title: 'Descrição', field: 'description',
         editComponent: props => ( 
@@ -52,7 +73,12 @@ const MenuTable = _ => {
       { 
         title: 'Dia da Semana', 
         field: 'day', 
-        lookup: { 0 : 'Segunda', 1: 'Terça', 2: 'Quarta', 3: 'Quinta', 4: 'Sexta' },
+        editComponent: props => ( 
+          <DateTextField 
+            props={props} 
+            label='Calendario' 
+            onChange={handleDate}  
+          />)
       },
       {
         title: 'Refeição',
@@ -60,7 +86,9 @@ const MenuTable = _ => {
         lookup: { 0: 'Almoço', 1: 'Jantar' },
       },
     ],
-    data: [],
+    data : [
+      {title: 'teste', description: 'Baran', day: '02/07/2021', meal: 0},
+    ]
   });
 
   const handleTitle = props => event => {
@@ -74,20 +102,33 @@ const MenuTable = _ => {
     data.description = event.target.value;
     props.onRowDataChange(data);
   };
+  const handleDate = props => event => {
+    const data = {...props.rowData};
+    const formatDate = format(new Date(event.target.value), 'MM/dd/yyyy')
+    data.day = formatDate;
+    props.onRowDataChange(data);
+  };
 
   const rowAdd = async newData => {
     try {
-      await api.post('/menu', newData)
-      .then(resp => {
+      // await api.post('/menu', newData)
+      // .then(resp => {
+        if(newData.title===undefined||newData.description===undefined){
+          setMessage(!message);
+          await messageDisabled()
+        }
         const data = [...state.data];
         data.push(newData);
-        apiGetData();
-        console.log(newData);
-      })
+        setState({...state, data})
+        console.log(newData)
+      //   apiGetData();
+      //   console.log(newData);
+      // })
     } catch(err) {
       console.log(err);
     }
   };
+  
 
   const rowUpdate = async (newData, oldData) => { 
     try {
@@ -104,20 +145,26 @@ const MenuTable = _ => {
   
   const rowDelete = async oldData => {
     try {
-      await api.delete(`/menu/${oldData._id}`)
-      .then(resp => {
+      // await api.delete(`/menu/${oldData._id}`)
+      // .then(resp => {
         const data = [...state.data];
         data.splice(data.indexOf(oldData), 1);
         setState({ ...state, data });
-      })
+      // })
     } catch(err) {
       console.log(err);
     }
   };
 
-  useEffect(_ => { apiGetData() }, []);
+  const messageDisabled=async()=>{
+    setTimeout(() => {
+      setMessage(message);
+    }, 2500);
+  }
   
   return (
+    <>
+    {message && <MessageUi message={message}/>}
     <MaterialTable
       title='Cardápio Refeitório'
       columns={state.columns}
@@ -139,6 +186,7 @@ const MenuTable = _ => {
         },
       }}
     />
+    </>
   );
 }
     
