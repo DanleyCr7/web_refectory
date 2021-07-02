@@ -35,7 +35,6 @@ const MenuTable = _ => {
     />
   );
   const materialDateInput = `${year}-${month}-${date}`; 
-
   const DateTextField = ({ props, label, onChange }) => (
     <TextField
     id="date"
@@ -57,7 +56,7 @@ const MenuTable = _ => {
           <MenuTextField 
             props={props} 
             label='Título' 
-            onChange={handleTitle}  
+            onChange={handleTitle}
           />
         ),
       },
@@ -104,7 +103,7 @@ const MenuTable = _ => {
   };
   const handleDate = props => event => {
     const data = {...props.rowData};
-    const formatDate = format(new Date(event.target.value), 'MM/dd/yyyy')
+    const formatDate = format(new Date(event.target.value), 'dd/MM/yyyy')
     data.day = formatDate;
     props.onRowDataChange(data);
   };
@@ -133,12 +132,13 @@ const MenuTable = _ => {
 
   const rowUpdate = async (newData, oldData) => { 
     try {
-      await api.put(`/menu/${newData.day}/${newData.meal}`, newData)
-      .then(resp => {
-        const data = [...state.data];
-        data[data.indexOf(oldData)] = newData;
-        setState({ ...state, data });
-      })
+      // await api.put(`/menu/${newData.day}/${newData.meal}`, newData)
+        // .then(resp => {
+          const data = [...state.data];
+          data[data.indexOf(oldData)] = newData;
+          console.log(data)
+          setState({ ...state, data });
+      // })
     } catch(err) {
       console.log(err);
     }

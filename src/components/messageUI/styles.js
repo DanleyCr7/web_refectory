@@ -14,7 +14,7 @@ export const StyledHeader = styled(Header)`
 export const StyledMessage = styled(Message)`
     background: #ed1127;
     width: 250px;
-    position: absolute;
+    position: fixed;
     top: 100px;
     right: 5px;
     z-index: 1;
