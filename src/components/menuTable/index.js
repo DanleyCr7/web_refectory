@@ -116,11 +116,12 @@ const MenuTable = _ => {
         if(newData.title===undefined||newData.description===undefined){
           setMessage(!message);
           await messageDisabled()
-        }
+        }else{
         const data = [...state.data];
         data.push(newData);
         setState({...state, data})
         console.log(newData)
+        }
       //   apiGetData();
       //   console.log(newData);
       // })
@@ -164,7 +165,7 @@ const MenuTable = _ => {
   
   return (
     <>
-    {message && <MessageUi message={message}/>}
+    {message && <MessageUi/>}
     <MaterialTable
       title='Cardápio Refeitório'
       columns={state.columns}
@@ -174,6 +175,7 @@ const MenuTable = _ => {
         onRowUpdate: rowUpdate,
         onRowDelete: rowDelete,
       }}
+      style={{zIndex: 0, }}
       localization={settingsText}
       options={{
         sorting: false,
@@ -183,7 +185,9 @@ const MenuTable = _ => {
           backgroundColor: '#2FA23B',
           color: '#eee',
           fontSize: '1em',
+          zIndex: 8
         },
+
       }}
     />
     </>

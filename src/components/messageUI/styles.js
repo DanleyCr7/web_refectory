@@ -8,13 +8,21 @@ export const StyledHeader = styled(Header)`
     text-align: center;
     font-size: 18px;
     font-weight: 800;
-`
+    border-radius: 8px 8px 0 0;
+    padding: 10px 0 10px 0;
+    `
 export const StyledMessage = styled(Message)`
-    background: ${props=> props.type};
-    width: 350px;
-    height: 150px;
-    border-radius: 8px;
+    background: #ed1127;
+    width: 250px;
     position: absolute;
-    right: 150px;
-    top: 50px;
+    top: 100px;
+    right: 5px;
+    z-index: 1;
+    border-radius: 8px;
+    p{
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+    }
+    
 `
