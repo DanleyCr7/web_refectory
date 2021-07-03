@@ -4,31 +4,20 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Badge from '@material-ui/core/Badge'
 
 // icons import material UI
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import LocalDiningIcon from '@material-ui/icons/LocalDining';
-import Check from '@material-ui/icons/Check';
 import Textsms from '@material-ui/icons/Textsms';
 // icons import material UI
 
-import Link from '@material-ui/core/Link';
-import { Link as RouterLink } from 'react-router-dom';
-import CountWarning from '../countWarning'
-import { AccountCircle } from '@material-ui/icons';
 import Box from '@material-ui/core/Box';
+import RouteList from '../listRoutesIcons';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -153,42 +142,7 @@ const NavDrawer = _ => {
           </IconButton>
         </div>
         <Divider style={{marginTop: 5}} />
-        <List>
-          <Link to='/' color='inherit' underline='none' component={RouterLink}>
-            <ListItem>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary='Principal' />
-            </ListItem>
-          </Link>
-
-          <Link to='/menu' color='inherit' underline='none' component={RouterLink}> 
-            <ListItem>
-              <ListItemIcon>
-                <LocalDiningIcon />
-              </ListItemIcon>
-              <ListItemText primary='Cardápio' />
-            </ListItem>
-          </Link>
-
-          <Link to='/checkin' color='inherit' underline='none' component={RouterLink}> 
-            <ListItem>
-              <ListItemIcon>
-                <Check />
-              </ListItemIcon>
-              <ListItemText primary='Entrar no Refeitório' />
-            </ListItem>
-          </Link>
-          <Link to='/warning' color='inherit' underline='none' component={RouterLink}> 
-            <ListItem>
-              <ListItemIcon>
-                <CountWarning/>
-              </ListItemIcon>
-              <ListItemText primary='Avisos' />
-            </ListItem>
-          </Link>
-        </List>
+        <RouteList/>
       </Drawer>
     </>
   );
