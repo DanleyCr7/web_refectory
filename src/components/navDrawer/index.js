@@ -18,6 +18,7 @@ import Textsms from '@material-ui/icons/Textsms';
 
 import Box from '@material-ui/core/Box';
 import RouteList from '../listRoutesIcons';
+import ModalBox from '../modalSendBox'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -72,6 +73,7 @@ const NavDrawer = _ => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [modalSend, setModalSend] = useState(true)
 
   const handleDrawerOpen = _ => {
     setOpen(true);
@@ -80,9 +82,13 @@ const NavDrawer = _ => {
   const handleDrawerClose = _ => {
     setOpen(false);
   };
+  const handleModalOpen = _ => {
+    setModalSend(true);
+  };
 
   return (
     <>
+    {modalSend && <ModalBox modalSend={modalSend} setModalSend={setModalSend}/>}
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -111,7 +117,7 @@ const NavDrawer = _ => {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={()=>{}}
+                onClick={handleModalOpen}
                 color="inherit"
               >
                 <Textsms />
