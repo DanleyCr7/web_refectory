@@ -4,11 +4,13 @@ import TextField from '@material-ui/core/TextField';
 import { format } from 'date-fns'
 import api from '../../services/api';
 import settingsText from '../../config/settingsText';
-import { MessageUi } from '../messageUI'
+import Snackbar from '../snackbar';
+
 import {date, month, year} from './date'
 
 const MenuTable = _ => {
   const [message, setMessage]= useState(false);
+  const [open, setOpen] = useState(false);
   const apiGetData = async _ => {
     try {
       const resp = await api.get('/menu');
@@ -113,8 +115,7 @@ const MenuTable = _ => {
       // await api.post('/menu', newData)
       // .then(resp => {
         if(newData.title===undefined||newData.description===undefined){
-          setMessage(!message);
-          await messageDisabled()
+          setOpen(true);
         }else{
         const data = [...state.data];
         data.push(newData);
@@ -156,16 +157,10 @@ const MenuTable = _ => {
       console.log(err);
     }
   };
-
-  const messageDisabled=async()=>{
-    setTimeout(() => {
-      setMessage(message);
-    }, 2500);
-  }
   
   return (
     <>
-    {message && <MessageUi/>}
+    <Snackbar open={open} setOpen={setOpen} variant={'warning'} msg={'Preencha todos os campos'}/>
     <MaterialTable
       title='Cardápio Refeitório'
       columns={state.columns}
@@ -175,6 +170,7 @@ const MenuTable = _ => {
         onRowUpdate: rowUpdate,
         onRowDelete: rowDelete,
       }}
+      
       style={{zIndex: 0, }}
       localization={settingsText}
       options={{

@@ -26,7 +26,9 @@ const CountMeal = ({ variant }) => {
   };
 
   useEffect(_ => {
-    apiCount();
+    // setTimeout(()=>{
+    // apiCount();
+    // }, 10000)
   }, [count])
 
   return <StyledCount variant='extended'>Reservas: {count}</StyledCount>

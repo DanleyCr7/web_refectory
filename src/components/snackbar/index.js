@@ -88,9 +88,7 @@ const Snackbars = ({ open, setOpen, variant, msg }) => {
   const classes = useStyles2();
 
   function handleClose(event, reason) {
-    if (reason === 'clickaway') {
-      return;
-    }
+    setOpen(false)
   }
 
   return (
@@ -101,7 +99,7 @@ const Snackbars = ({ open, setOpen, variant, msg }) => {
       }}
       open={open}
       autoHideDuration={6000}
-      onClose={setTimeout(_ => setOpen(false), 1000)}
+      onClose={setTimeout(_ => setOpen(false), 2500)}
     >
       <MySnackbarContentWrapper
         onClose={handleClose}

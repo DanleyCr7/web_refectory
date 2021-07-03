@@ -21,8 +21,8 @@ const StudentsTable = ({ students, apiData, title }) => {
   const [columns] = useState([
     { title: 'Nome', field: 'name', filtering: false },
     { title: 'Matrícula', field: 'matricula', filtering: false },
-    { title: 'Curso', field: 'course', },
-    { title: 'Turma', field: 'classroom' },
+    { title: 'Curso', field: 'course', filtering: false },
+    { title: 'Turma', field: 'classroom',filtering: false },
     { title: 'Faltas', field: 'absents', filtering: false  }
   ]);
   

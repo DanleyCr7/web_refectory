@@ -129,7 +129,8 @@ const Check = _ => {
               Confirmar Presença
             </Button>
             {!!open && 
-              <Snackbar open={true} setOpen={setOpen} variant={'success'} msg={'Presença confirmada'} />}
+              <Snackbar open={open} setOpen={setOpen} variant={'success'} msg={'Presença confirmada'} />
+              }
           </form>
         </div>
       </Grid>

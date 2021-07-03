@@ -8,6 +8,9 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Badge from '@material-ui/core/Badge'
+
+// icons import material UI
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -18,9 +21,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import Check from '@material-ui/icons/Check';
+import Warning from '@material-ui/icons/Warning';
+// icons import material UI
+
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
-
+import CountWarning from '../countWarning'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -159,6 +165,14 @@ const NavDrawer = _ => {
                 <Check />
               </ListItemIcon>
               <ListItemText primary='Entrar no Refeitório' />
+            </ListItem>
+          </Link>
+          <Link to='/warning' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <CountWarning/>
+              </ListItemIcon>
+              <ListItemText primary='Avisos' />
             </ListItem>
           </Link>
         </List>
