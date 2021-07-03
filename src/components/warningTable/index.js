@@ -10,10 +10,11 @@ export const WarningTable =_=>{
             {title: 'Turma', field: 'class'},
             {title: 'Quantidade', field: 'quantidy'},
             {title: 'Turno', field: 'bout'},
-            {title: 'Ano', field: 'year' }
+            {title: 'Ano', field: 'year' },
+            {title: 'Data', field: 'date' }
         ],
         data:[
-            {teacher: 'Danrley', warning: 'Os alunos estão com fome', class: 'Informatica', quantidy: 40, bout: 'Manhã', year:'2' }
+            {teacher: 'Danrley', warning: 'Os alunos estão com fome', class: 'Informatica', quantidy: 40, bout: 'Manhã', year:'2', date: '24/07/2021' }
         ]
     })
     const onRowDelete =_=>{
@@ -22,7 +23,7 @@ export const WarningTable =_=>{
     
     return(
         <MaterialTable
-          title='Reserva de refeição'
+          title='Reservas solicitadas'
           columns={state.collumns}
           data={state.data}
           editable={{
@@ -33,7 +34,7 @@ export const WarningTable =_=>{
               icon: 'check',
               tooltip: 'Aceitar',
               onClick: (event, rowData) => {
-                // Do save operation
+                alert('teste')
               }
             }
           ]}

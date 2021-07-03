@@ -170,7 +170,6 @@ const MenuTable = _ => {
         onRowUpdate: rowUpdate,
         onRowDelete: rowDelete,
       }}
-      
       style={{zIndex: 0, }}
       localization={settingsText}
       options={{

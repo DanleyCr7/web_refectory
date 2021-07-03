@@ -21,12 +21,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import Check from '@material-ui/icons/Check';
-import Warning from '@material-ui/icons/Warning';
+import Textsms from '@material-ui/icons/Textsms';
 // icons import material UI
 
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import CountWarning from '../countWarning'
+import { AccountCircle } from '@material-ui/icons';
+import Box from '@material-ui/core/Box';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -100,6 +102,7 @@ const NavDrawer = _ => {
         })}
       >
         <Toolbar>
+        <Box alignItems='center' display='flex' flexGrow={1}>
           <IconButton
             color="inherit"
             aria-label="Open drawer"
@@ -114,6 +117,16 @@ const NavDrawer = _ => {
           <Typography variant="h6" noWrap>
             Controle de Refeições
           </Typography>
+          </Box>
+        <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={()=>{}}
+                color="inherit"
+              >
+                <Textsms />
+              </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
