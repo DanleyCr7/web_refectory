@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import MaterialTable from 'material-table'
 
 import settingsDefaultText from '../../config/settingsText'
-export const WarningTable =_=>{
+export const WarningTable =({data, title,})=>{
     const [state, setState] = useState({
         collumns:[
             {title: 'Professor', field: 'teacher'},
@@ -13,9 +13,7 @@ export const WarningTable =_=>{
             {title: 'Ano', field: 'year' },
             {title: 'Data', field: 'date' }
         ],
-        data:[
-            {teacher: 'Danrley', warning: 'Os alunos estão com fome', class: 'Informatica', quantidy: 40, bout: 'Manhã', year:'2', date: '24/07/2021' }
-        ]
+        
     })
     const onRowDelete =_=>{
         alert('teste')
@@ -23,9 +21,9 @@ export const WarningTable =_=>{
     
     return(
         <MaterialTable
-          title='Reservas solicitadas'
+          title={title}
           columns={state.collumns}
-          data={state.data}
+          data={data}
           editable={{
               onRowDelete: onRowDelete, 
           }}
@@ -41,7 +39,7 @@ export const WarningTable =_=>{
           localization={settingsDefaultText}
           options={{
             sorting:false,
-            pageSize:10,
+            pageSize: 5,
             actionsColumnIndex: -1,
             headerStyle:{
                 backgroundColor: '#2FA23B',

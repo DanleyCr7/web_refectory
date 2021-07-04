@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import Check from '@material-ui/icons/Check';
+import School from '@material-ui/icons/School';
 import CountWarning from '../countWarning'
 
 export const RouteList =_=>{
@@ -45,6 +46,14 @@ export const RouteList =_=>{
                 <CountWarning/>
               </ListItemIcon>
               <ListItemText primary='Avisos' />
+            </ListItem>
+          </Link>
+          <Link to='/lack' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <School/>
+              </ListItemIcon>
+              <ListItemText primary='Faltas' />
             </ListItem>
           </Link>
         </List>

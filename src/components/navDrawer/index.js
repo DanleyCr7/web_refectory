@@ -73,7 +73,7 @@ const NavDrawer = _ => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [modalSend, setModalSend] = useState(true)
+  const [modalSend, setModalSend] = useState(false)
 
   const handleDrawerOpen = _ => {
     setOpen(true);
