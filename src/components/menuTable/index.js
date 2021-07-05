@@ -83,6 +83,7 @@ const MenuTable = _ => {
             onChange={handleDate}  
           />),
         validate: rowData => Boolean(rowData.day),
+        lookup: new Date(),
       },
       {
         title: 'Refeição',
