@@ -61,6 +61,7 @@ const MenuTable = _ => {
             onChange={handleTitle}
           />
         ),
+        validate: rowData => Boolean(rowData.title),
       },
       { title: 'Descrição', field: 'description',
         editComponent: props => ( 
@@ -69,7 +70,8 @@ const MenuTable = _ => {
             label='Descrição' 
             onChange={handleDescrip}  
           />
-        )
+        ),
+        validate: rowData => Boolean(rowData.description),
       },
       { 
         title: 'Dia da Semana', 
@@ -79,12 +81,15 @@ const MenuTable = _ => {
             props={props} 
             label='Calendario' 
             onChange={handleDate}  
-          />)
+          />),
+        validate: rowData => Boolean(rowData.day),
       },
       {
         title: 'Refeição',
         field: 'meal',
         lookup: { 0: 'Almoço', 1: 'Jantar' },
+        validate: rowData => Boolean(rowData.meal),
+
       },
     ],
     data : [
@@ -114,14 +119,10 @@ const MenuTable = _ => {
     try {
       // await api.post('/menu', newData)
       // .then(resp => {
-        if(newData.title===undefined||newData.description===undefined){
-          setOpen(true);
-        }else{
         const data = [...state.data];
         data.push(newData);
         setState({...state, data})
-        console.log(newData)
-        }
+  
       //   apiGetData();
       //   console.log(newData);
       // })
@@ -166,7 +167,17 @@ const MenuTable = _ => {
       columns={state.columns}
       data={state.data}
       editable={{
-        onRowAdd: rowAdd,
+        onRowAdd: newData =>
+        new Promise((resolve, reject) => {
+            if(!newData) {
+            // alert('required');
+            setOpen(true)
+            reject();
+            }else{
+              rowAdd(newData)
+              resolve()
+            }
+        }),
         onRowUpdate: rowUpdate,
         onRowDelete: rowDelete,
       }}
