@@ -45,7 +45,7 @@ export const RouteList =_=>{
               <ListItemIcon>
                 <CountWarning/>
               </ListItemIcon>
-              <ListItemText primary='Avisos' />
+              <ListItemText primary='Reservas' />
             </ListItem>
           </Link>
           <Link to='/lack' color='inherit' underline='none' component={RouterLink}> 

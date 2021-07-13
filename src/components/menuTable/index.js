@@ -42,7 +42,7 @@ const MenuTable = _ => {
     id="date"
     label={label}
     type="date"
-    defaultValue={materialDateInput} // Today's Date being used as default
+    defaultValue={materialDateInput} // Todate's Date being used as default
     InputLabelProps={{
       shrink: true,
       required: true
@@ -70,32 +70,29 @@ const MenuTable = _ => {
             label='Descrição' 
             onChange={handleDescrip}  
           />
-        ),
+        ),  
         validate: rowData => Boolean(rowData.description),
       },
       { 
         title: 'Dia da Semana', 
-        field: 'day', 
+        field: 'date', 
         editComponent: props => ( 
           <DateTextField 
             props={props} 
             label='Calendario' 
             onChange={handleDate}  
           />),
-        validate: rowData => Boolean(rowData.day),
-        lookup: new Date(),
+        validate: rowData => Boolean(rowData.date),
       },
       {
         title: 'Refeição',
-        field: 'meal',
+        field: 'type',
         lookup: { 0: 'Almoço', 1: 'Jantar' },
-        validate: rowData => Boolean(rowData.meal),
+        validate: rowData => Boolean(rowData.type),
 
       },
     ],
-    data : [
-      {title: 'teste', description: 'Baran', day: '02/07/2021', meal: 0},
-    ]
+    data : []
   });
 
   const handleTitle = props => event => {
@@ -112,21 +109,21 @@ const MenuTable = _ => {
   const handleDate = props => event => {
     const data = {...props.rowData};
     const formatDate = format(new Date(event.target.value), 'dd/MM/yyyy')
-    data.day = formatDate;
+    data.date = formatDate;
     props.onRowDataChange(data);
   };
 
   const rowAdd = async newData => {
     try {
-      // await api.post('/menu', newData)
-      // .then(resp => {
+      await api.post('/menu', newData)
+      .then(resp => {
         const data = [...state.data];
         data.push(newData);
-        setState({...state, data})
-  
-      //   apiGetData();
-      //   console.log(newData);
-      // })
+        setState({...state, data})  
+        console.log(resp) 
+      }).catch(error=>{
+        console.log(error)
+      })
     } catch(err) {
       console.log(err);
     }
@@ -135,7 +132,7 @@ const MenuTable = _ => {
 
   const rowUpdate = async (newData, oldData) => { 
     try {
-      // await api.put(`/menu/${newData.day}/${newData.meal}`, newData)
+      // await api.put(`/menu/${newData.date}/${newData.type}`, newData)
         // .then(resp => {
           const data = [...state.data];
           data[data.indexOf(oldData)] = newData;
@@ -159,7 +156,11 @@ const MenuTable = _ => {
       console.log(err);
     }
   };
-  
+  useEffect(async _=>{
+    await apiGetData()
+    console.log(state)
+  }, [state])
+
   return (
     <>
     <Snackbar open={open} setOpen={setOpen} variant={'warning'} msg={'Preencha todos os campos'}/>
