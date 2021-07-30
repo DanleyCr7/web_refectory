@@ -11,46 +11,6 @@ import {date, month, year} from './date'
 const MenuTable = _ => {
   const [message, setMessage]= useState(false);
   const [open, setOpen] = useState(false);
-  const apiGetData = async _ => {
-    try {
-      const resp = await api.get('/menu');
-      const data = resp.data;
-      setState({ ...state, data});
-    } catch(err) {
-      console.log(err);
-    }
-  };
-
-  const MenuTextField = ({ props, label, onChange }) => (
-    <TextField
-      id='filled-multiline-flexible'
-      label={label}
-      multiline
-      rows='4'
-      InputLabelProps={{
-        required: true
-      }}
-      value={props.value}
-      onChange={onChange(props)}
-      margin='normal'
-      variant='filled'
-    />
-  );
-  const materialDateInput = `${year}-${month}-${date}`; 
-  const DateTextField = ({ props, label, onChange }) => (
-    <TextField
-    id="date"
-    label={label}
-    type="date"
-    defaultValue={materialDateInput} // Todate's Date being used as default
-    InputLabelProps={{
-      shrink: true,
-      required: true
-    }}
-    onChange={onChange(props)}
-    />
-  );
-
   const [state, setState] = useState({
     columns: [
       { title: 'Título', field: 'title',
@@ -95,6 +55,48 @@ const MenuTable = _ => {
     data : []
   });
 
+  const apiGetData = async _ => {
+    try {
+      const resp = await api.get('/menu');
+      const data = resp.data;
+      setState({ ...state, data});
+    } catch(err) {
+      console.log(err);
+    }
+  };
+
+  const MenuTextField = ({ props, label, onChange }) => (
+    <TextField
+      id='filled-multiline-flexible'
+      label={label}
+      multiline
+      rows='4'
+      InputLabelProps={{
+        required: true
+      }}
+      value={props.value}
+      onChange={onChange(props)}
+      margin='normal'
+      variant='filled'
+    />
+  );
+  const materialDateInput = `${year}-${month}-${date}`; 
+  const DateTextField = ({ props, label, onChange }) => (
+    <TextField
+    id="date"
+    label={label}
+    type="date"
+    defaultValue={materialDateInput} // Todate's Date being used as default
+    InputLabelProps={{
+      shrink: true,
+      required: true
+    }}
+    onChange={onChange(props)}
+    />
+  );
+
+
+
   const handleTitle = props => event => {
     const data = {...props.rowData};
     data.title = event.target.value;
@@ -117,10 +119,7 @@ const MenuTable = _ => {
     try {
       await api.post('/menu', newData)
       .then(resp => {
-        const data = [...state.data];
-        data.push(newData);
-        setState({...state, data})  
-        console.log(resp) 
+        apiGetData()
       }).catch(error=>{
         console.log(error)
       })
@@ -132,34 +131,40 @@ const MenuTable = _ => {
 
   const rowUpdate = async (newData, oldData) => { 
     try {
-      // await api.put(`/menu/${newData.date}/${newData.type}`, newData)
-        // .then(resp => {
+      await api.put(`/menu`, {
+        id: newData._id,
+        title: newData.title,
+        description: newData.description,
+        date: new Date(), 
+        type: newData.type,
+      })
+        .then(resp => {
           const data = [...state.data];
           data[data.indexOf(oldData)] = newData;
-          console.log(data)
           setState({ ...state, data });
-      // })
+      })
     } catch(err) {
       console.log(err);
     }
   };
   
-  const rowDelete = async oldData => {
+  const rowDelete = async (oldData) => {
+    console.log(oldData._id)
     try {
-      // await api.delete(`/menu/${oldData._id}`)
-      // .then(resp => {
+      await api.delete(`/menu`, {data: {id: oldData._id}})
+      .then(resp => {
+        console.log(resp)
         const data = [...state.data];
         data.splice(data.indexOf(oldData), 1);
         setState({ ...state, data });
-      // })
+      })
     } catch(err) {
       console.log(err);
     }
   };
-  useEffect(async _=>{
-    await apiGetData()
-    console.log(state)
-  }, [state])
+  useEffect(()=>{
+    apiGetData()
+  }, []);
 
   return (
     <>

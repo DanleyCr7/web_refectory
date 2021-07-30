@@ -11,8 +11,7 @@ const Main = _ => {
   const apiData = async _ => {
     try {
       Promise.all([ 
-        await api.get('/students/cannot-required-meal'),
-        await api.get('/students/can-required-meal')
+        await api.get('/')
       ]).then(response => {
         console.log(response[0].data);
         setCannot(response[0].data);
@@ -23,9 +22,9 @@ const Main = _ => {
     }
   };
 
-  useEffect(_ => {
-    apiData();
-  }, []);
+  // useEffect(_ => {
+  //   apiData();
+  // }, []);
 
   return (
     <>

@@ -75,25 +75,25 @@ const Check = _ => {
       // it's no return error at backend
       .catch(_ => setHelperText('Eita'));
   };
-  useEffect(()=>{
-    api.get('/qrcode').then(response=>{
-      // consoloel
-      setPathCode(response.data)
-    }).catch(error=>{
-      console.log(error)
-    })
-  }, [pathCode])
+  // useEffect(()=>{
+  //   api.get('/qrcode').then(response=>{
+  //     // consoloel
+  //     setPathCode(response.data)
+  //   }).catch(error=>{
+  //     console.log(error)
+  //   })
+  // }, [pathCode])
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      api.get('/qrcode').then(response=>{
-        // consoloel
-        setStudent(response.data)
-      }).catch(error=>{
-        console.log(error)
-      })
-    })
-  }, [student])
+  // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     api.get('/qrcode').then(response=>{
+  //       // consoloel
+  //       setStudent(response.data)
+  //     }).catch(error=>{
+  //       console.log(error)
+  //     })
+  //   })
+  // }, [student])
   const handleChange = event => {
     setValue(event.target.value);
     setHelperText('')
