@@ -65,6 +65,7 @@ const Check = _ => {
     name: '',
     urlImage: '',
   })
+  
   const apiData = _ => {
     api.get(`/students/${value}`)
       .then(resp => {
@@ -75,14 +76,13 @@ const Check = _ => {
       // it's no return error at backend
       .catch(_ => setHelperText('Eita'));
   };
-  // useEffect(()=>{
-  //   api.get('/qrcode').then(response=>{
-  //     // consoloel
-  //     setPathCode(response.data)
-  //   }).catch(error=>{
-  //     console.log(error)
-  //   })
-  // }, [pathCode])
+  useEffect(()=>{
+    api.get('/qrcode').then(response=>{
+      setPathCode(response.data)
+    }).catch(error=>{
+      console.log(error)
+    })
+  }, [])
 
   // useEffect(()=>{
   //   setTimeout(()=>{
@@ -134,7 +134,10 @@ const Check = _ => {
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}> 
-          <QRCode renderAs='svg' value='teste' size={280} />
+          {/* QRCODE */}
+          <QRCode renderAs='svg' value={pathCode} size={280} />
+          {/* QRCODE */}
+
           <Typography className={classes.typografy} component='h1' variant='h5'>
             Entrar no Refeitório
           </Typography>

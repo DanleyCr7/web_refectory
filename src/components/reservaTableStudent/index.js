@@ -19,11 +19,12 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
 
   const [columns] = useState([
 
-    { title: 'Aluno', field: 'id_student.NOME', filtering: false },
+    { title: 'Aluno', field: `id_student.NOME`, filtering: false },
     { title: 'Matrícula', field: 'id_student.MATRICULA', filtering: false },
     { title: 'Curso', field: 'id_student.CURSO', filtering: false },
     { title: 'Turma', field: 'id_student.TURMA',filtering: false },
     { title: 'Aprovado', field: 'approved',filtering: false },
+    { title: 'Confirmação', field: `confirm`,filtering: false },
   ]);
   
   const doneSelection = async (evnt, students) => {
@@ -115,7 +116,8 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
           onRowUpdate: rowUpdate,
           onRowDelete: rowDelete,
         }}
-      localization={settingsText}
+        styles={{}}
+        localization={settingsText}
         options={{
           selection: true,
           filtering: true,

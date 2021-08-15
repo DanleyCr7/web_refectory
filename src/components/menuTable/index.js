@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import TextField from '@material-ui/core/TextField';
-import { format } from 'date-fns'
+import { format, addDays} from 'date-fns'
 import api from '../../services/api';
 import settingsText from '../../config/settingsText';
 import Snackbar from '../snackbar';
@@ -110,7 +110,7 @@ const MenuTable = _ => {
   };
   const handleDate = props => event => {
     const data = {...props.rowData};
-    const formatDate = format(new Date(event.target.value), 'dd/MM/yyyy')
+    const formatDate = format(addDays(new Date(event.target.value), 1), 'dd/MM/yyyy')
     data.date = formatDate;
     props.onRowDataChange(data);
   };
@@ -135,7 +135,7 @@ const MenuTable = _ => {
         id: newData._id,
         title: newData.title,
         description: newData.description,
-        date: new Date(), 
+        date: newData.date, 
         type: newData.type,
       })
         .then(resp => {
