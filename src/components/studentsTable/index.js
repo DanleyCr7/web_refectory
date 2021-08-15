@@ -19,18 +19,30 @@ const StudentsTable = ({ students, apiData, title }) => {
 
   // const [ selectedRow, setSelectedRow ] = useState({});
   const [columns] = useState([
-    { title: 'Nome', field: 'name', filtering: false },
-    { title: 'Matrícula', field: 'matricula', filtering: false },
-    { title: 'Curso', field: 'course', filtering: false },
-    { title: 'Turma', field: 'classroom',filtering: false },
-    { title: 'Faltas', field: 'absents', filtering: false  }
+    { title: 'NOME', field: 'NOME', filtering: false },
+    { title: 'Matrícula', field: 'MATRICULA', filtering: false },
+    { title: 'Curso', field: 'CURSO', filtering: false },
+    { title: 'Turma', field: 'TURMA',filtering: false },
+    { title: 'Permisão', field: 'permission', filtering: false  }
   ]);
   
   const doneSelection = async (evnt, students) => {
     console.log('onclick');
     console.log(students);
     const promisesList = students.map(async student => {
-      await api.put(`/students/can-required-meal/${student._id}`)
+      await api.put(`/students/permission/yes/${student._id}`)
+    });
+
+    await Promise.all(promisesList).then(resp => {
+      console.log('cabou o put');
+      apiData();
+    });
+  };
+  const removeAutorization = async (evnt, students) => {
+    console.log('onclick');
+    console.log(students);
+    const promisesList = students.map(async student => {
+      await api.put(`/students/permission/no/${student._id}`)
     });
 
     await Promise.all(promisesList).then(resp => {
@@ -47,18 +59,23 @@ const StudentsTable = ({ students, apiData, title }) => {
         localization={settingsText}
         columns={columns}
         data={students}
-        actions={[{ 
+        actions={[
+          { 
           icon: 'done_all', 
-          tooltip: 'Feito',
+          tooltip: 'Autorizar',
           backgroundColor: '#2AB083',
           onClick: doneSelection,
-        }]}
-        // onRowClick={((event, rowData) => {
-        //   console.log('selec');
-        //   console.log(rowData);
-        //   rowData.tableData.checked = !rowData.tableData.checked;
-        //   setSelectedRow(rowData);
-        // })}
+        },
+        { 
+          icon: 'delete_forever', 
+          tooltip: 'Remover autorização',
+          backgroundColor: '#2AB083',
+          onClick: removeAutorization,
+        }
+      ]}
+        onRowClick={((event, rowData) => {
+          console.log('teste')
+        })}
         options={{
           selection: true,
           filtering: true,

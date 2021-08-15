@@ -9,8 +9,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import Check from '@material-ui/icons/Check';
 import School from '@material-ui/icons/School';
+import Book from '@material-ui/icons/Book';
 import CountWarning from '../countWarning'
-
 export const RouteList =_=>{
     return(
         <List>
@@ -54,6 +54,15 @@ export const RouteList =_=>{
                 <School/>
               </ListItemIcon>
               <ListItemText primary='Faltas' />
+            </ListItem>
+          </Link>
+          
+          <Link to='/reserveStudent' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <Book/>
+              </ListItemIcon>
+              <ListItemText primary='Reservas de alunos' />
             </ListItem>
           </Link>
         </List>
