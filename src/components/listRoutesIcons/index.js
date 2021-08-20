@@ -65,6 +65,14 @@ export const RouteList =_=>{
               <ListItemText primary='Reservas de alunos' />
             </ListItem>
           </Link>
+          <Link to='/registerProf' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <Book/>
+              </ListItemIcon>
+              <ListItemText primary='Registrar professor' />
+            </ListItem>
+          </Link>
         </List>
     )
 }

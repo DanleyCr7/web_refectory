@@ -7,6 +7,7 @@ import Checkin from './pages/checkin';
 import Warning from './pages/warning';
 import Lack from './pages/lack';
 import ReservaTableStudent from './pages/reserveListStudent';
+import RegisterProf from './pages/registerProf';
 
 const Routes = _ => (
   <Switch>
@@ -16,6 +17,7 @@ const Routes = _ => (
     <Route path='/warning' component={Warning}/>
     <Route path='/lack' component={Lack}/>
     <Route path='/reserveStudent' component={ReservaTableStudent}/>
+    <Route path='/registerProf' component={RegisterProf}/>
   </Switch>
 );
 

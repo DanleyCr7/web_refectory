@@ -57,8 +57,9 @@ const MenuTable = _ => {
 
   const apiGetData = async _ => {
     try {
-      const resp = await api.get('/menu');
+      const resp = await api.get('/menu/all');
       const data = resp.data;
+      console.log(data)
       setState({ ...state, data});
     } catch(err) {
       console.log(err);
@@ -119,6 +120,7 @@ const MenuTable = _ => {
     try {
       await api.post('/menu', newData)
       .then(resp => {
+        console.log(resp.data)
         apiGetData()
       }).catch(error=>{
         console.log(error)
