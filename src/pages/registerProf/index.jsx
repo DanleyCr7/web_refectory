@@ -8,11 +8,19 @@ import api from '../../services/api';
 const useStyles = makeStyles({
     button:{
        backgroundColor: '#17871d',
-       color: '#fff'
+       color: '#fff',
+      marginTop: 15,
+
     },
     margin:{
-        marginTop: 80
-    }
+        marginTop: 80,
+        paddingLeft: 15
+    },
+   
+    textField:{
+      width: '90%',
+
+    },
 });
 export default function Register() {
   const classes = useStyles();
@@ -53,38 +61,52 @@ export default function Register() {
     })
 }
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+    
+    <form onSubmit={register}>
+    <Grid className={classes.margin} xs={12} container>
+     <Grid  xs={12} sm={12}>
+      <Typography variant="h6">
         Cadastrar professor
       </Typography>
-      <form onSubmit={register} styles="width: 100%">
-      <Grid container spacing={3}>
-        <Grid className={classes.margin} spacing={3} item xs={45}>
+      </Grid>
+       <Grid  xs={12} sm={6}>
           <TextField
             name="name"
             label="Nome do professor"
+            className={classes.textField}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             name="email"
             label="email"
-          />
+            className={classes.textField}
+            />
         </Grid>
+    
         <Grid item xs={12} sm={6}>
           <TextField
             name="password"
             label="Senha"
+            className={classes.textField}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="cpf" name="cpf" label="CPF"  />
+          <TextField
+          id="cpf"
+          name="cpf"
+          label="CPF"
+          className={classes.textField}
+          
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             id="zip"
             name="rg"
             label="RG"
+            className={classes.textField}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -92,6 +114,8 @@ export default function Register() {
             id="phone"
             name="phone"
             label="phone"
+            className={classes.textField}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -99,6 +123,8 @@ export default function Register() {
             id="Cidade"
             name="city"
             label="Cidade"
+            className={classes.textField}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -106,13 +132,13 @@ export default function Register() {
             id="Estado"
             name="state"
             label="Estado"
+            className={classes.textField} 
           />
         </Grid>
         <Grid item xs={12} sm={6}>
             <Button type="submit" className={classes.button} >Cadastrar professor</Button>
-        </Grid>
+        </Grid> 
       </Grid>
       </form>
-    </React.Fragment>
   );
 }

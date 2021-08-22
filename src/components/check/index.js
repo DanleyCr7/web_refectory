@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Logo from '../../images/logo.png';
 import api from '../../services/api';
 import Snackbar from '../../components/snackbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 var QRCode = require('qrcode.react');
 // custom components
 
@@ -55,29 +56,25 @@ const useStyles = makeStyles(theme => ({
 const Check = _ => {
   const classes = useStyles();
   const [value, setValue] = useState('');
-  const [helperText, setHelperText] = useState('');
+  const [helperText, setHelperText] = useState({
+    resp: '',
+    message: ''
+  });
+  const [circular, setCircular] = useState(false)
   const [err, setErr] = useState(false);
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);  
   const [qrcode, setQrcode] = useState(false);
   const [pathCode, setPathCode] = useState('esperando')
+  const [ menu, setMenu ] = useState({});
   const [student, setStudent] = useState({
     name: '',
     urlImage: '',
   })
   
-  const apiData = _ => {
-    api.get(`/students/${value}`)
-      .then(resp => {
-        setData(resp.data);
-        // here is better snackabar 
-        setHelperText('Boa refeição');
-      })
-      // it's no return error at backend
-      .catch(_ => setHelperText('Eita'));
-  };
-  useEffect(()=>{
+   useEffect(()=>{
     api.get('/qrcode').then(response=>{
+      console.log(response.data)
       setPathCode(response.data)
     }).catch(error=>{
       console.log(error)
@@ -94,17 +91,26 @@ const Check = _ => {
   //     })
   //   })
   // }, [student])
+
+  useEffect(()=>{
+  api.get('/menu').then(resp=>{
+      console.log(resp.data)
+
+      let menu = resp.data
+      setMenu(menu)
+   }).catch(erro=>{
+     console.log(erro)
+   })
+  }, [])
   const handleChange = event => {
     setValue(event.target.value);
-    setHelperText('')
     console.log(event.target.value);
   };
 
-  const handleClick = event => {  
-    event.preventDefault();
+  const handleClick = (msg) => {  
+    // event.preventDefault();
     if (err) {
       setValue('');
-      setHelperText('Erro na matrícula')
     } else {
       // apiData();
       setOpen(true);
@@ -122,6 +128,51 @@ const Check = _ => {
       }
     }
   }
+
+  const confirmReserve =(event)=>{
+    event.preventDefault();
+    setCircular(true)
+    const { value } = event.target.matricula;
+    console.log(value)
+    //essa requisação pega a matricula da API para seta na requisição de fazer a reserva
+    api.post('/login', {code: value}).then(resp=>{
+      let student = resp.data;
+      console.log(student)
+      if(student?.MATRICULA){
+          //faz a reserva do aluno
+           api.post(`/menu/reserve/${menu?._id}`, 
+            { id: student?._id}).then(async(resp)=>{
+              console.log(resp.data)
+
+             let message = resp.data?.message 
+            //verifica se existe messagem da api com erro
+            if(message){
+            
+              setHelperText({message: message, resp: 'warning' })
+              setCircular(false)
+              setOpen(true)
+            
+            }else{
+             //else se caso tiver dado tudo certo. 
+            
+             setHelperText({message: 'Reserva confirmada', resp: 'success' })
+             setCircular(false)
+             setOpen(true)
+              
+            }
+          })
+      }else{
+        //esse else é da requição da matricula caso tenha sido informada errada ou não exista
+        setHelperText({message: 'Erro na matricula', resp: 'error' })
+        setCircular(false)
+        setOpen(true)
+      }    
+
+    }).catch(erro=>{
+      console.log(erro)
+    })
+  }
+
 
   return (
     <Grid container component='main' className={classes.root}>
@@ -141,7 +192,7 @@ const Check = _ => {
           <Typography className={classes.typografy} component='h1' variant='h5'>
             Entrar no Refeitório
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={confirmReserve} noValidate>
             <TextField
               variant='outlined'
               margin='normal'
@@ -152,25 +203,23 @@ const Check = _ => {
               name='matricula'
               autoComplete='matricula'
               autoFocus
-              value={value}
-              onChange={handleChange}
               onKeyDown={_ => checkNumber(value)}
-              helperText={helperText}
               error={err}
             />
+            {/* faz loading até receber resposta da API */}
+            {circular ?
+            <CircularProgress color="secondary" /> :
             <Button
               type='submit'
               fullWidth
               variant='contained'
               color='primary'
               className={classes.submit}
-              onClick={handleClick}
             >
               Confirmar Presença
             </Button>
-            {!!open &&
-              <Snackbar open={open} setOpen={setOpen} variant={'success'} msg={'Presença confirmada'} />
             }
+              <Snackbar open={open} setOpen={setOpen} variant={helperText.resp} msg={helperText.message} />
           </form>
         </div>
       </Grid>

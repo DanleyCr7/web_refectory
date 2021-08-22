@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import List from '@material-ui/core/List';
+import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,10 +11,18 @@ import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import Check from '@material-ui/icons/Check';
 import School from '@material-ui/icons/School';
 import Book from '@material-ui/icons/Book';
+import Group from '@material-ui/icons/Group';
+import LockOpen from '@material-ui/icons/LockOpen';
+import EventSeat from '@material-ui/icons/EventSeat';
+import { ExitToApp } from '@material-ui/icons';
+
 import CountWarning from '../countWarning'
 export const RouteList =_=>{
-    return(
+  const [auth, setAuth] = useState(false)
+  return(
         <List>
+          {auth &&
+          <>
           <Link to='/' color='inherit' underline='none' component={RouterLink}>
             <ListItem>
               <ListItemIcon>
@@ -65,14 +74,42 @@ export const RouteList =_=>{
               <ListItemText primary='Reservas de alunos' />
             </ListItem>
           </Link>
+
           <Link to='/registerProf' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
-                <Book/>
+                <Group/>
               </ListItemIcon>
               <ListItemText primary='Registrar professor' />
             </ListItem>
           </Link>
+          </> }
+
+          <Link to='/loginProfessor' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <LockOpen/>
+              </ListItemIcon>
+              <ListItemText primary='Login do professor' />
+            </ListItem>
+          </Link>
+          <Link to='/reservasTurmas' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <EventSeat/>
+              </ListItemIcon>
+              <ListItemText primary='Reservar turma' />
+            </ListItem>
+          </Link>
+          <Button onClick={()=> alert('teste')}>
+             <ListItem>
+              <ListItemIcon>
+                <ExitToApp/>
+              </ListItemIcon>
+              <ListItemText primary='Sair' />
+            </ListItem>
+          </Button>
+          
         </List>
     )
 }

@@ -1,22 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MaterialTable from 'material-table';
+import api from '../../services/api';
 
 const TableLack =_=>{
     const [state, setState] = useState({
         columns:[
-            {title: 'Aluno', field: 'student'},
+            {title: 'Aluno', field: 'NOME'},
             {title: 'Motivo', field: 'reason'},
-            {title: 'Matricula', field: 'registration'},
-            {title: 'Turma', field: 'class'},
-            {title: 'Turno', field: 'shift'},
-            {title: 'Ano', field: 'year'},
-            {title: 'Faltas', field:'lack'},
+            {title: 'Matricula', field: 'MATRICULA'},
+            {title: 'Turma', field: 'CURSO'},
+            {title: 'Turno', field: 'TURNO'},
+            {title: 'Ano', field: 'PERIODO'},
+            // {title: 'Faltas', field:'lack'},
         ],
         data:[
-            {student: 'Danrley', reason: 'Queria ir pra casa', registration:'21013528', class: 'Informática', shift: 'tarde', year: '2', lack: 2}
         ]
     })
     
+    useEffect(()=>{
+        api.get('/students/found').then(resp=>{
+            console.log(resp.data)
+            setState({...state, data: resp.data})
+        })
+    }, [])
+
     return(
         <MaterialTable
            title="Alunos que não compareceram"
