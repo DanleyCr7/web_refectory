@@ -11,6 +11,7 @@ const Main = _ => {
     try {
       const resp = await api.get('/students');
       setStudents(resp.data);
+      console.log(resp.data )
     } catch(err) {
       console.log(err); 
     }

@@ -10,6 +10,10 @@ import ReservaTableStudent from './pages/reserveListStudent';
 import RegisterProf from './pages/registerProf';
 import LoginProfessor from './pages/loginProfessor';
 import ReservasTurmas from './pages/reservasTurmas';
+import StudentsRegister from './pages/studentsRegister';
+import RegisterCourser from './pages/registerCourser';
+import RegisterClasses from './pages/registerClasses';
+import RegisterStudent from './pages/registerStudent';
 
 const Routes = _ => (
   <Switch>
@@ -22,6 +26,10 @@ const Routes = _ => (
     <Route path='/registerProf' component={RegisterProf}/>
     <Route path='/loginProfessor' component={LoginProfessor}/>
     <Route path='/reservasTurmas' component={ReservasTurmas}/>
+    <Route path='/StudentsRegister' component={StudentsRegister}/>
+    <Route path='/RegisterCourser' component={RegisterCourser}/>
+    <Route path='/RegisterClasses' component={RegisterClasses}/>    
+    <Route path='/RegisterStudent' component={RegisterStudent}/>
   </Switch>
 );
 

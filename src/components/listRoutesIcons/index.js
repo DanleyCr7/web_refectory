@@ -14,15 +14,14 @@ import Book from '@material-ui/icons/Book';
 import Group from '@material-ui/icons/Group';
 import LockOpen from '@material-ui/icons/LockOpen';
 import EventSeat from '@material-ui/icons/EventSeat';
-import { ExitToApp } from '@material-ui/icons';
+import { Class, ExitToApp, GolfCourseRounded, BookOutlined } from '@material-ui/icons';
 
 import CountWarning from '../countWarning'
 export const RouteList =_=>{
   const [auth, setAuth] = useState(false)
   return(
         <List>
-          {auth &&
-          <>
+    
           <Link to='/' color='inherit' underline='none' component={RouterLink}>
             <ListItem>
               <ListItemIcon>
@@ -83,8 +82,6 @@ export const RouteList =_=>{
               <ListItemText primary='Registrar professor' />
             </ListItem>
           </Link>
-          </> }
-
           <Link to='/loginProfessor' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
@@ -93,6 +90,31 @@ export const RouteList =_=>{
               <ListItemText primary='Login do professor' />
             </ListItem>
           </Link>
+          <Link to='/RegisterCourser' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <GolfCourseRounded/>
+              </ListItemIcon>
+              <ListItemText primary='Registrar curso' />
+            </ListItem>
+          </Link>
+          <Link to='/RegisterClasses' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <Class/>
+              </ListItemIcon>
+              <ListItemText primary='Registrar turma  ' />
+            </ListItem>
+          </Link>
+          <Link to='/registerStudent' color='inherit' underline='none' component={RouterLink}> 
+            <ListItem>
+              <ListItemIcon>
+                <BookOutlined/>
+              </ListItemIcon>
+              <ListItemText primary='Registrar aluno' />
+            </ListItem>
+          </Link>
+          
           <Link to='/reservasTurmas' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
