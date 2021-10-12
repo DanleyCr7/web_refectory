@@ -51,7 +51,10 @@ export default function RegisterClasses() {
             shift: data?.shift?.value,
             year: data?.year?.value,
         }).then(resp=>{
-            console.log(resp.data)
+            alert('Turmas cadastrada com sucesso');
+            window.location.reload();
+        }).catch(error=>{
+         alert('Ops, aconteceu algum erro no cadastro!');
         })
     }
 

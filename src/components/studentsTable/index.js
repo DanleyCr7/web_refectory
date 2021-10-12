@@ -19,8 +19,8 @@ const StudentsTable = ({ students, apiData, title }) => {
 
   // const [ selectedRow, setSelectedRow ] = useState({});
   const [columns] = useState([
-    { title: 'NOME', field: 'NOME', filtering: false },
-    { title: 'Matrícula', field: 'MATRICULA', filtering: false },
+    { title: 'NOME', field: 'name', filtering: false },
+    { title: 'Matrícula', field: 'code', filtering: false },
     { title: 'Curso', field: 'CURSO', filtering: false },
     { title: 'Turma', field: 'TURMA',filtering: false },
     { title: 'Permisão', field: 'permission', filtering: false  }

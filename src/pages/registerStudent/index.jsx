@@ -58,10 +58,11 @@ export default function Register() {
         code: data?.code?.value,
         id: idClass,
     }).then(resp=>{
-        console.log(resp.data)
+        alert('Aluno cadastrado com sucesso');
+        window.location.reload();
     })
     .catch(error=>{
-        console.log(error);
+         alert('Ops, aconteceu algum erro no cadastro!');
     })
     }
 
