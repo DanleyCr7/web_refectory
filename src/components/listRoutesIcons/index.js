@@ -87,7 +87,6 @@ export const RouteList =_=>{
               <Link className={classes.list} to='/warning' color='inherit' underline='none' component={RouterLink}> 
                 <ListItem>
                   <ListItemIcon>
-                    <CountWarning/>
                   </ListItemIcon>
                   <ListItemText primary='Reservas' />
                 </ListItem>
@@ -95,7 +94,6 @@ export const RouteList =_=>{
             <Link className={classes.list} to='/reserveStudent' color='inherit' underline='none' component={RouterLink}> 
                 <ListItem>
                   <ListItemIcon>
-                    <Book/>
                   </ListItemIcon>
                   <ListItemText primary='Reservas de alunos' />
                 </ListItem>
@@ -103,7 +101,6 @@ export const RouteList =_=>{
               <Link className={classes.list} to='/reservasTurmas' color='inherit' underline='none' component={RouterLink}> 
                 <ListItem>
                   <ListItemIcon>
-                    <EventSeat/>
                   </ListItemIcon>
                   <ListItemText primary='Reservar turma' />
                 </ListItem>
@@ -123,7 +120,6 @@ export const RouteList =_=>{
          <Link className={classes.list} to='/registerProf' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
-                <Group/>
               </ListItemIcon>
               <ListItemText primary='Registrar professor' />
             </ListItem>
@@ -131,7 +127,6 @@ export const RouteList =_=>{
          <Link className={classes.list} to='/RegisterCourser' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
-                <GolfCourseRounded/>
               </ListItemIcon>
               <ListItemText primary='Registrar curso' />
             </ListItem>
@@ -139,7 +134,6 @@ export const RouteList =_=>{
           <Link className={classes.list} to='/RegisterClasses' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
-                <Class/>
               </ListItemIcon>
               <ListItemText primary='Registrar turma  ' />
             </ListItem>
@@ -147,7 +141,6 @@ export const RouteList =_=>{
           <Link className={classes.list} to='/registerStudent' color='inherit' underline='none' component={RouterLink}> 
             <ListItem>
               <ListItemIcon>
-                <BookOutlined/>
               </ListItemIcon>
               <ListItemText primary='Registrar aluno' />
             </ListItem>

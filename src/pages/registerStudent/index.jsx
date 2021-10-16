@@ -132,7 +132,7 @@ export default function Register() {
         </Grid>
         <Grid item xs={12} sm={6}>
         <FormControl style={{minWidth: '80%'}}>
-            <InputLabel id="demo-simple-select-autowidth-label">Curso</InputLabel>
+            <InputLabel id="demo-simple-select-autowidth-label">Turma</InputLabel>
             <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
