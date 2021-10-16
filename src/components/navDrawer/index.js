@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
 const NavDrawer =({handleModalOpen})=> {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = _ => {
     setOpen(true);
