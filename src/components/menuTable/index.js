@@ -9,7 +9,6 @@ import Snackbar from '../snackbar';
 import {date, month, year} from './date'
 
 const MenuTable = _ => {
-  const [message, setMessage]= useState(false);
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({
     columns: [

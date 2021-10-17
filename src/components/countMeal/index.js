@@ -16,15 +16,6 @@ const StyledCount = styled(Fab)({
 const CountMeal = ({ variant }) => {
   const [count, setCount] = useState(0);
 
-  const apiCount = async _ => {
-    try {
-      const resp = await api.get('/students/required-meal');
-      setCount(resp.data.length)
-    } catch(err) {
-      console.log(err);
-    }
-  };
-
   useEffect(_ => {
     // setTimeout(()=>{
     // apiCount();

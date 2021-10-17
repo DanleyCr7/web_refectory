@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Student } from '../students';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Logo from '../../images/logo.png';
@@ -62,12 +60,11 @@ const Check = _ => {
   });
   const [circular, setCircular] = useState(false)
   const [err, setErr] = useState(false);
-  const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);  
-  const [qrcode, setQrcode] = useState(false);
+  const [qrcode] = useState(false);
   const [pathCode, setPathCode] = useState('esperando')
   const [ menu, setMenu ] = useState({});
-  const [student, setStudent] = useState({
+  const [student] = useState({
     name: '',
     urlImage: '',
   })
@@ -102,21 +99,7 @@ const Check = _ => {
      console.log(erro)
    })
   }, [])
-  const handleChange = event => {
-    setValue(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const handleClick = (msg) => {  
-    // event.preventDefault();
-    if (err) {
-      setValue('');
-    } else {
-      // apiData();
-      setOpen(true);
-    }
-  };
-
+  
   const checkNumber = value => {
     if (value.trim() !== '') {
       const rule = /^[0-9]+$/;

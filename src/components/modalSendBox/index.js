@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CancelIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',

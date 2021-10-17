@@ -57,7 +57,10 @@ export default function Register() {
         birth_date: data?.birth_date?.value,
         cep: data?.cep?.value,
     }).then(resp=>{
-        console.log(resp.data)
+        alert('Professor cadastrado com sucesso');
+        window.location.reload();
+    }).catch(error=>{
+         alert('Ops, aconteceu algum erro no cadastro!');
     })
 }
   return (
