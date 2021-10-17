@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import List from '@material-ui/core/List';
-import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,15 +9,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import Check from '@material-ui/icons/Check';
 import School from '@material-ui/icons/School';
-import Book from '@material-ui/icons/Book';
-import Group from '@material-ui/icons/Group';
 import LockOpen from '@material-ui/icons/LockOpen';
-import EventSeat from '@material-ui/icons/EventSeat';
-import { Class, ExitToApp, GolfCourseRounded, BookOutlined, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import Collapsible from 'react-collapsible';
-import CountWarning from '../countWarning'
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from 'material-ui/styles/typography';
 
 const useStyles = makeStyles(theme => ({
   collapsible:{
@@ -41,7 +35,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const RouteList =_=>{
-  const [auth, setAuth] = useState(false);
   const [collapsibleReserve, setcollapsibleReserve] = useState(false);
   const [collapsibleRegister, setcollapsibleRegister] = useState(false);
   

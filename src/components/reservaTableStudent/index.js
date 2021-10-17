@@ -6,6 +6,9 @@ import api from '../../services/api';
 import settingsText from '../../config/settingsText';
 
 const StudentsTableReserve = ({ students, apiData, title }) => {
+  const [state, setState] = useState([]);
+  const [open, setOpen] = useState(false);
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -54,37 +57,37 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
   
 
   const rowUpdate = async (newData, oldData) => { 
-    // try {
-    //   await api.put(`/menu`, {
-    //     id: newData._id,
-    //     title: newData.title,
-    //     description: newData.description,
-    //     date: new Date(), 
-    //     type: newData.type,
-    //   })
-    //     .then(resp => {
-    //       const data = [...state.data];
-    //       data[data.indexOf(oldData)] = newData;
-    //       setState({ ...state, data });
-    //   })
-    // } catch(err) {
-    //   console.log(err);
-    // }
+     try {
+       await api.put(`/menu`, {
+         id: newData._id,
+         title: newData.title,
+         description: newData.description,
+         date: new Date(), 
+         type: newData.type,
+       })
+         .then(resp => {
+           const data = [...state.data];
+           data[data.indexOf(oldData)] = newData;
+           setState({ ...state, data });
+       })
+     } catch(err) {
+       console.log(err);
+     }
   };
   
   const rowDelete = async (oldData) => {
-    // console.log(oldData._id)
-    // try {
-    //   await api.delete(`/menu`, {data: {id: oldData._id}})
-    //   .then(resp => {
-    //     console.log(resp)
-    //     const data = [...state.data];
-    //     data.splice(data.indexOf(oldData), 1);
-    //     setState({ ...state, data });
-    //   })
-    // } catch(err) {
-    //   console.log(err);
-    // }
+     console.log(oldData._id)
+     try {
+       await api.delete(`/menu`, {data: {id: oldData._id}})
+       .then(resp => {
+         console.log(resp)
+         const data = [...state.data];
+         data.splice(data.indexOf(oldData), 1);
+         setState({ ...state, data });
+       })
+     } catch(err) {
+       console.log(err);
+     }
   };
 
   return (
@@ -104,14 +107,14 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
         editable={{
           onRowAdd: newData =>
           new Promise((resolve, reject) => {
-              // if(!newData) {
-              // // alert('required');
-              // setOpen(true)
-              // reject();
-              // }else{
-              //   rowAdd(newData)
-              //   resolve()
-              // }
+               if(!newData) {
+                alert('required');
+                  setOpen(true)
+                  reject();
+               }else{
+                 rowAdd(newData)
+                 resolve()
+               }
           }),
           onRowUpdate: rowUpdate,
           onRowDelete: rowDelete,

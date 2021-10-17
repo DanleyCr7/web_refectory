@@ -35,7 +35,10 @@ export default function Register() {
     await api.post('/courses',{
         name: data?.name?.value,
     }).then(resp=>{
-        console.log(resp.data)
+        alert('Curso cadastrado com sucesso');
+            window.location.reload();
+    }).catch(error=>{
+         alert('Ops, aconteceu algum erro no cadastro!');
     })
 }
   return (
