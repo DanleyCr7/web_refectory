@@ -5,7 +5,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import api from '../../services/api';
 import settingsText from '../../config/settingsText';
 
-const StudentsTable = ({ students, apiData, title }) => {
+const CoursesTable = ({ courses, apiData, title }) => {
+  // const [ selectedRow, setSelectedRow ] = useState({});
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -17,40 +19,9 @@ const StudentsTable = ({ students, apiData, title }) => {
     },
   });
 
-  // const [ selectedRow, setSelectedRow ] = useState({});
   const [columns] = useState([
     { title: 'NOME', field: 'name', filtering: false },
-    { title: 'Matrícula', field: 'code', filtering: false },
-    { title: 'Curso', field: 'CURSO', filtering: false },
-    { title: 'Turma', field: 'TURMA', filtering: false },
-    { title: 'Permisão', field: 'permission', filtering: false }
   ]);
-
-  const doneSelection = async (evnt, students) => {
-    console.log('onclick');
-    console.log(students);
-    const promisesList = students.map(async student => {
-      await api.put(`/students/permission/yes/${student._id}`)
-    });
-
-    await Promise.all(promisesList).then(resp => {
-      console.log('cabou o put');
-      apiData();
-    });
-  };
-
-  const removeAutorization = async (evnt, students) => {
-    console.log('onclick');
-    console.log(students);
-    const promisesList = students.map(async student => {
-      await api.put(`/students/permission/no/${student._id}`)
-    });
-
-    await Promise.all(promisesList).then(resp => {
-      console.log('cabou o put');
-      apiData();
-    });
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -59,19 +30,12 @@ const StudentsTable = ({ students, apiData, title }) => {
         title={title}
         localization={settingsText}
         columns={columns}
-        data={students}
+        data={courses}
         actions={[
-          {
-            icon: 'done_all',
-            tooltip: 'Autorizar',
-            backgroundColor: '#2AB083',
-            onClick: doneSelection,
-          },
           {
             icon: 'delete_forever',
             tooltip: 'Remover autorização',
-            backgroundColor: '#2AB083',
-            onClick: removeAutorization,
+            backgroundColor: '#2AB083'
           }
         ]}
         onRowClick={((event, rowData) => {
@@ -97,4 +61,4 @@ const StudentsTable = ({ students, apiData, title }) => {
   )
 };
 
-export default StudentsTable;
+export default CoursesTable;
