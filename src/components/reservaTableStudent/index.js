@@ -22,10 +22,10 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
 
   const [columns] = useState([
 
-    { title: 'Aluno', field: `id_student.NOME`, filtering: false },
-    { title: 'Matrícula', field: 'id_student.MATRICULA', filtering: false },
-    { title: 'Curso', field: 'id_student.CURSO', filtering: false },
-    { title: 'Turma', field: 'id_student.TURMA',filtering: false },
+    { title: 'Aluno', field: `id_student.name`, filtering: false },
+    { title: 'Matrícula', field: 'id_student.code', filtering: false },
+    { title: 'Curso', field: 'id_student.course', filtering: false },
+    { title: 'Turma', field: 'id_student.class',filtering: false },
     { title: 'Aprovado', field: 'approved',filtering: false },
     { title: 'Confirmação', field: `confirm`,filtering: false },
   ]);
@@ -57,37 +57,37 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
   
 
   const rowUpdate = async (newData, oldData) => { 
-     try {
-       await api.put(`/menu`, {
-         id: newData._id,
-         title: newData.title,
-         description: newData.description,
-         date: new Date(), 
-         type: newData.type,
-       })
-         .then(resp => {
-           const data = [...state.data];
-           data[data.indexOf(oldData)] = newData;
-           setState({ ...state, data });
-       })
-     } catch(err) {
-       console.log(err);
-     }
+    //  try {
+    //    await api.put(`/menu`, {
+    //      id: newData._id,
+    //      title: newData.title,
+    //      description: newData.description,
+    //      date: new Date(), 
+    //      type: newData.type,
+    //    })
+    //      .then(resp => {
+    //        const data = [...state.data];
+    //        data[data.indexOf(oldData)] = newData;
+    //        setState({ ...state, data });
+    //    })
+    //  } catch(err) {
+    //    console.log(err);
+    //  }
   };
   
   const rowDelete = async (oldData) => {
-     console.log(oldData._id)
-     try {
-       await api.delete(`/menu`, {data: {id: oldData._id}})
-       .then(resp => {
-         console.log(resp)
-         const data = [...state.data];
-         data.splice(data.indexOf(oldData), 1);
-         setState({ ...state, data });
-       })
-     } catch(err) {
-       console.log(err);
-     }
+    //  console.log(oldData._id)
+    //  try {
+    //    await api.delete(`/menu`, {data: {id: oldData._id}})
+    //    .then(resp => {
+    //      console.log(resp)
+    //      const data = [...state.data];
+    //      data.splice(data.indexOf(oldData), 1);
+    //      setState({ ...state, data });
+    //    })
+    //  } catch(err) {
+    //    console.log(err);
+    //  }
   };
 
   return (
@@ -105,17 +105,7 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
           onClick: doneSelection,
         }]}
         editable={{
-          onRowAdd: newData =>
-          new Promise((resolve, reject) => {
-               if(!newData) {
-                alert('required');
-                  setOpen(true)
-                  reject();
-               }else{
-                 rowAdd(newData)
-                 resolve()
-               }
-          }),
+          onRowAdd: newData =>null,
           onRowUpdate: rowUpdate,
           onRowDelete: rowDelete,
         }}

@@ -40,27 +40,17 @@ export default function Register() {
 
   const register = async (event) => {
     event.preventDefault()
-    let data = event.target;
-
-    console.log({
-      name: data?.name?.value,
-      email: data?.email?.value,
-      cpf: data?.cpf?.value,
-      phone: data?.phone?.value,
-      code: data?.code?.value,
-      id_class: idClass,
-    })
-
-    await api.post('/students', {
-      name: data?.name?.value,
-      email: data?.email?.value,
-      cpf: data?.cpf?.value,
-      phone: data?.phone?.value,
-      code: data?.code?.value,
-      id_class: idClass,
-    }).then(resp => {
-      alert('Aluno cadastrado com sucesso');
-      window.location.reload();
+    let data = event.target;    
+    await api.post('/students',{
+        name: data?.name?.value,
+        email: data?.email?.value,
+        cpf: data?.cpf?.value,
+        phone: data?.phone?.value,
+        code: data?.code?.value,
+        id: idClass,
+    }).then(resp=>{
+        alert('Aluno cadastrado com sucesso');
+        window.location.reload();
     })
       .catch(error => {
         alert('Ops, aconteceu algum erro no cadastro!');
@@ -69,8 +59,7 @@ export default function Register() {
 
   useEffect(() => {
     api.get('/class')
-      .then(resp => {
-        console.log(resp.data);
+    .then(resp=>{
         setTurmas(resp.data);
       })
       .catch(error => {
@@ -82,8 +71,8 @@ export default function Register() {
     setIdClass(event.target.value);
   };
 
-  return (
 
+  return (
     <form onSubmit={register}>
       <Grid className={classes.margin} xs={12} container>
         <Grid xs={12} sm={12}>
