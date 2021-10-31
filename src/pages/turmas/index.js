@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-
-import StudentsTable from '../../components/studentsTable';
 import CountMeal from '../../components/countMeal';
+import { ClassTable } from '../../components/ClassTable';
 import api from '../../services/api';
 
 const Main = _ => {
-  const [students, setStudents] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   const apiData = async _ => {
     try {
-      const resp = await api.get('/students');
-      setStudents(resp.data);
-      console.log(resp.data )
-    } catch(err) {
-      console.log(err); 
+      const resp = await api.get('/class');
+      setClasses(resp.data);
+      console.log(resp.data)
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -23,21 +22,22 @@ const Main = _ => {
 
   return (
     <>
-      <main style={{flexGrow: 1}}>
+      <main style={{ flexGrow: 1 }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
-          padding: '0 8px',
+          padding: '0px 0px',
           minHeight: '64px',
-          }}
+        }}
         />
-        <StudentsTable 
-          students={students}
-          apiData={apiData} 
-          title='Alunos' 
+
+        <ClassTable
+          classes={classes}
+          apiData={apiData}
+          title='Turmas'
         />
-       
+
       </main>
       <CountMeal />
     </>
