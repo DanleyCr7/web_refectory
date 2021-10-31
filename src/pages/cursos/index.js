@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import CoursesTable from '../../components/coursesTable';
+import { CoursesTable } from '../../components/CoursesTable';
 import CountMeal from '../../components/countMeal';
 import api from '../../services/api';
 
