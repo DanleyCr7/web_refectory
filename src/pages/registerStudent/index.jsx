@@ -42,14 +42,6 @@ export default function Register() {
     event.preventDefault()
     let data = event.target;
     
-    console.log({
-        name: data?.name?.value,
-        email: data?.email?.value,
-        cpf: data?.cpf?.value,
-        phone: data?.phone?.value,
-        code: data?.code?.value,
-        id: idClass,
-    })
     await api.post('/students',{
         name: data?.name?.value,
         email: data?.email?.value,
@@ -69,7 +61,6 @@ export default function Register() {
   useEffect(()=>{
     api.get('/class')
     .then(resp=>{
-        console.log(resp.data);
         setTurmas(resp.data);
   })
     .catch(error=>{
@@ -80,8 +71,8 @@ export default function Register() {
   const handleChange = (event) => {
     setIdClass(event.target.value);
   };
-  return (
-    
+
+  return (  
     <form onSubmit={register}>
     <Grid className={classes.margin} xs={12} container>
      <Grid  xs={12} sm={12}>
