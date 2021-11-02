@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +12,7 @@ import api from '../../services/api';
 import Snackbar from '../../components/snackbar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useHistory } from 'react-router-dom';
+import { FormControl, InputLabel, Select, MenuItem, } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -65,7 +66,19 @@ export default function SignIn() {
     message: ''
   });
   const [circular, setCircular] = useState(false)
-  const [open, setOpen] = useState(false);  
+  const [open, setOpen] = useState(false);
+  const [select, setSelect] = useState('professor');
+  const users = [
+    {
+      descricao: 'Professor',
+      value: 'professor',
+    },
+    {
+      descricao: 'Admin',
+      value: 'admin',
+    }
+  ]
+  const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
   function login(e) {
     e.preventDefault();
@@ -77,17 +90,24 @@ export default function SignIn() {
       password : values.password.value,
     }
     
-    api.post(`/teacher/login`, data).
+    api.post(`/auth/${select}`, data).
       then( async (resp) => {
         const { data } = resp;
-        setHelperText({message: 'Usuário logado com sucesso', resp: 'success' })
+        setCircular(false)
+        setHelperText({ message: 'Usuário logado com sucesso', resp: 'success' })
+        setOpen(true)
         await localStorage.setItem('@ifpi/user', JSON.stringify(data));
-        window.location.reload();
+        history.push(data.permission === 'admin' ? 'Main' : 'Turmas');
+        history.go();
       }).catch(error => {
         setHelperText({message: error?.response?.data, resp: 'error' })
         setCircular(false)
         setOpen(true)
     });
+  }
+
+  const handleChange = (event) => {
+    setSelect(event.target.value);
   }
 
   return (
@@ -119,6 +139,23 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
+          <FormControl style={{ minWidth: '100%', marginTop: 5 }}>
+            <InputLabel id="demo-simple-select-autowidth-label">Tipo de usuário</InputLabel>
+            <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={select}
+                onChange={handleChange}
+                autoWidth
+                label="Curso"
+            >
+                {
+                    users.map((item, index) => (
+                        <MenuItem value={item.value}>{item?.descricao}</MenuItem>
+                    ))
+                }
+            </Select>
+        </FormControl>
           {circular ?
             <CircularProgress style={{color: '#17871d', marginTop: 15}} color="secondary" /> :
             <Button

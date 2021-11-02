@@ -5,21 +5,21 @@ import api from '../../services/api';
 
 const Main = _ => {
   const [classes, setClasses] = useState([]);
-  const user = localStorage.getItem('@ifpi/user');
+  const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
   const apiData = async _ => {
     try {
       const resp = await api.get('/class');
       setClasses(resp.data);
-      console.log(resp.data)
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(_ => {
+  useEffect(() => {
     apiData();
-  }, []);
+  }, [])
+
 
   return (
     <>

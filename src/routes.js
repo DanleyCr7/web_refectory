@@ -9,7 +9,7 @@ import Warning from './pages/warning';
 import Lack from './pages/lack';
 import ReservaTableStudent from './pages/reserveListStudent';
 import RegisterProf from './pages/registerProf';
-import LoginProfessor from './pages/loginProfessor';
+import Auth from './pages/loginProfessor';
 import ReservasTurmas from './pages/reservasTurmas';
 import StudentsRegister from './pages/studentsRegister';
 import RegisterCourser from './pages/registerCourser';
@@ -27,14 +27,14 @@ const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 const Routes = _ => (
 
   <Switch>
-    <Route path='/' exact component={user ? Menu : LoginProfessor} />
+    <Route path='/' exact component={Main} />
     <Route path='/menu' component={Menu} />
     <Route path='/checkin' component={Checkin} />
     <Route path='/warning' component={Warning} />
     <Route path='/lack' component={Lack} />
     <Route path='/reserveStudent' component={ReservaTableStudent} />
     <Route path='/registerProf' component={RegisterProf} />
-    <Route path='/loginProfessor' component={Main} />
+    <Route path='/auth' component={Auth} />
     <Route path='/reservasTurmas' component={ReservasTurmas} />
     <Route path='/StudentsRegister' component={StudentsRegister} />
     <Route path='/RegisterCourser' component={RegisterCourser} />

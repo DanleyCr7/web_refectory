@@ -69,8 +69,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NavDrawer =({handleModalOpen})=> {
+const NavDrawer = ({ handleModalOpen }) => {
   const history = useHistory();
+  const user = localStorage.getItem('@ifpi/user');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(true);
@@ -84,7 +85,9 @@ const NavDrawer =({handleModalOpen})=> {
 
   const logout = _ => {
     localStorage.removeItem('@ifpi/user');
-    window.location.reload();
+    history.push('Auth');
+    history.go();
+
   };
 
 
@@ -114,7 +117,7 @@ const NavDrawer =({handleModalOpen})=> {
             Controle de Refeições
           </Typography>
           </Box>
-        <IconButton
+        {/* <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -122,7 +125,8 @@ const NavDrawer =({handleModalOpen})=> {
                 color="inherit"
               >
                 <Textsms />
-          </IconButton>
+          </IconButton> */}
+          { user &&
           <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -132,6 +136,7 @@ const NavDrawer =({handleModalOpen})=> {
               >
               <Input/>
             </IconButton>
+          }
         </Toolbar>
       </AppBar>
       <Drawer

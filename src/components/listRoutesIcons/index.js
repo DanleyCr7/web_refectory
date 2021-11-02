@@ -47,42 +47,55 @@ export const RouteList = _ => {
     <List>
       {user ?
         <>
-        <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
-          <ListItem >
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary='Principal' />
-          </ListItem>
-        </Link>
+        {/* Admin */}
+          {user?.permission === 'admin' &&
+            <>
+              <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
+                <ListItem >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Principal' />
+                </ListItem>
+              </Link>
       
-      <Link className={classes.list} to='/menu' color='inherit' underline='none' component={RouterLink}>
-        <ListItem>
-          <ListItemIcon>
-            <LocalDiningIcon />
-          </ListItemIcon>
-          <ListItemText primary='Cardápio' />
-        </ListItem>
-      </Link>
+              <Link className={classes.list} to='/menu' color='inherit' underline='none' component={RouterLink}>
+                <ListItem>
+                  <ListItemIcon>
+                    <LocalDiningIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Cardápio' />
+                </ListItem>
+              </Link>
 
-      <Link className={classes.list} to='/cursos' color='inherit' underline='none' component={RouterLink}>
-        <ListItem>
-          <ListItemIcon>
-            <Book />
-          </ListItemIcon>
-          <ListItemText primary='Cursos' />
-        </ListItem>
-      </Link>
+              <Link className={classes.list} to='/cursos' color='inherit' underline='none' component={RouterLink}>
+                <ListItem>
+                  <ListItemIcon>
+                    <Book />
+                  </ListItemIcon>
+                  <ListItemText primary='Cursos' />
+                </ListItem>
+              </Link>
 
-      <Link className={classes.list} to='/Professores' color='inherit' underline='none' component={RouterLink}>
-        <ListItem>
-          <ListItemIcon>
-            <Person />
-          </ListItemIcon>
-          <ListItemText primary='Professores' />
-        </ListItem>
-      </Link>
-
+              <Link className={classes.list} to='/Professores' color='inherit' underline='none' component={RouterLink}>
+                <ListItem>
+                  <ListItemIcon>
+                    <Person />
+                  </ListItemIcon>
+                  <ListItemText primary='Professores' />
+                </ListItem>
+              </Link>
+              <Link className={classes.list} to='/lack' color='inherit' underline='none' component={RouterLink}>
+                <ListItem>
+                  <ListItemIcon>
+                    <School />
+                  </ListItemIcon>
+                  <ListItemText primary='Faltas' />
+                </ListItem>
+              </Link>
+            </>
+          }
+      {/* Admin */}
       <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
@@ -90,22 +103,7 @@ export const RouteList = _ => {
           </ListItemIcon>
           <ListItemText primary='Turmas' />
         </ListItem>
-          </Link>
-       
-
-
-      {/* Collapsible de cadastros */}
-
-      <Link className={classes.list} to='/lack' color='inherit' underline='none' component={RouterLink}>
-        <ListItem>
-          <ListItemIcon>
-            <School />
-          </ListItemIcon>
-          <ListItemText primary='Faltas' />
-        </ListItem>
       </Link>
-
-
       {/* Collapsible de reservas */}
       <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleReserve(!collapsibleReserve)}>
         <ListItem>
@@ -117,6 +115,8 @@ export const RouteList = _ => {
       </Link>
 
       <Collapsible open={collapsibleReserve}>
+        {user?.permission  === 'admin' &&
+        <>      
         <Link className={classes.list} to='/warning' color='inherit' underline='none' component={RouterLink}>
           <ListItem>
             <ListItemIcon>
@@ -131,6 +131,8 @@ export const RouteList = _ => {
             <ListItemText primary='Reservas de alunos' />
           </ListItem>
         </Link>
+        </>
+        }
         <Link className={classes.list} to='/reservasTurmas' color='inherit' underline='none' component={RouterLink}>
           <ListItem>
             <ListItemIcon>
@@ -141,15 +143,16 @@ export const RouteList = _ => {
       </Collapsible>
       {/* Collapsible de reservas */}
       {/* Collapsible de cadastros */}
-      <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleRegister(!collapsibleRegister)}>
-        <ListItem>
-          <ListItemIcon>
-            {collapsibleRegister ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-          </ListItemIcon>
-          <ListItemText primary='Cadastros' />
-        </ListItem>
-      </Link>
-
+          {user?.permission === 'admin' &&
+            <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleRegister(!collapsibleRegister)}>
+              <ListItem>
+                <ListItemIcon>
+                  {collapsibleRegister ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                </ListItemIcon>
+                <ListItemText primary='Cadastros' />
+              </ListItem>
+            </Link>
+       }
       <Collapsible open={collapsibleRegister}>
         <Link className={classes.list} to='/registerProf' color='inherit' underline='none' component={RouterLink}>
           <ListItem>
@@ -182,12 +185,12 @@ export const RouteList = _ => {
       </Collapsible>
        </>
       :
-      <Link className={classes.list} to='/loginProfessor' color='inherit' underline='none' component={RouterLink}>
+      <Link className={classes.list} to='/auth' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
             <LockOpen />
           </ListItemIcon>
-          <ListItemText primary='Login do professor' />
+          <ListItemText primary='Acesso' />
         </ListItem>
       </Link> }
       <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
