@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-
+import Input from '@material-ui/icons/Input'
 // icons import material UI
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,6 +18,7 @@ import Textsms from '@material-ui/icons/Textsms';
 
 import Box from '@material-ui/core/Box';
 import RouteList from '../listRoutesIcons';
+import { useHistory } from 'react-router-dom';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -69,10 +70,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavDrawer =({handleModalOpen})=> {
+  const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(true);
-
   const handleDrawerOpen = _ => {
     setOpen(true);
   };
@@ -80,7 +81,12 @@ const NavDrawer =({handleModalOpen})=> {
   const handleDrawerClose = _ => {
     setOpen(false);
   };
-  
+
+  const logout = _ => {
+    localStorage.removeItem('@ifpi/user');
+    window.location.reload();
+  };
+
 
   return (
     <>
@@ -116,7 +122,16 @@ const NavDrawer =({handleModalOpen})=> {
                 color="inherit"
               >
                 <Textsms />
-              </IconButton>
+          </IconButton>
+          <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={logout}
+                color="inherit"
+              >
+              <Input/>
+            </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer

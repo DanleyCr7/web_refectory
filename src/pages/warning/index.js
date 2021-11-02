@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import WarningTable from '../../components/warningTable';
 const Warning = _ => {
     const [ requested ]= useState([])

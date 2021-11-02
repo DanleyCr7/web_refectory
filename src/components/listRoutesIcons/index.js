@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import List from '@material-ui/core/List';
 import Link from '@material-ui/core/Link';
+import { Redirect } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,7 +12,7 @@ import Check from '@material-ui/icons/Check';
 import School from '@material-ui/icons/School';
 import LockOpen from '@material-ui/icons/LockOpen';
 import Person from '@material-ui/icons/Person';
-import { Book, Bookmark, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { Book, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import Collapsible from 'react-collapsible';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -38,20 +39,23 @@ const useStyles = makeStyles(theme => ({
 export const RouteList = _ => {
   const [collapsibleReserve, setcollapsibleReserve] = useState(false);
   const [collapsibleRegister, setcollapsibleRegister] = useState(false);
-
+  const user = JSON.parse(localStorage.getItem('@ifpi/user'));
+  
+  
   const classes = useStyles();
-
   return (
     <List>
-      <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
-        <ListItem >
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary='Principal' />
-        </ListItem>
-      </Link>
-
+      {user ?
+        <>
+        <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
+          <ListItem >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary='Principal' />
+          </ListItem>
+        </Link>
+      
       <Link className={classes.list} to='/menu' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
@@ -61,8 +65,6 @@ export const RouteList = _ => {
         </ListItem>
       </Link>
 
-
-
       <Link className={classes.list} to='/cursos' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
@@ -71,8 +73,6 @@ export const RouteList = _ => {
           <ListItemText primary='Cursos' />
         </ListItem>
       </Link>
-
-
 
       <Link className={classes.list} to='/Professores' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
@@ -90,7 +90,8 @@ export const RouteList = _ => {
           </ListItemIcon>
           <ListItemText primary='Turmas' />
         </ListItem>
-      </Link>
+          </Link>
+       
 
 
       {/* Collapsible de cadastros */}
@@ -103,8 +104,6 @@ export const RouteList = _ => {
           <ListItemText primary='Faltas' />
         </ListItem>
       </Link>
-
-
 
 
       {/* Collapsible de reservas */}
@@ -181,7 +180,8 @@ export const RouteList = _ => {
           </ListItem>
         </Link>
       </Collapsible>
-
+       </>
+      :
       <Link className={classes.list} to='/loginProfessor' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
@@ -189,8 +189,7 @@ export const RouteList = _ => {
           </ListItemIcon>
           <ListItemText primary='Login do professor' />
         </ListItem>
-      </Link>
-
+      </Link> }
       <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>

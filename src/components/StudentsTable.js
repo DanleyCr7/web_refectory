@@ -1,5 +1,5 @@
 import React from 'react';
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
 import api from '../services/api';
 import { createTheme } from '@material-ui/core';
@@ -22,7 +22,7 @@ export const StudentsTable = ({ students, apiData, title }) => {
 
 
   const deleteStudents = async (event, rowData) => {
-    rowData.map(row => {
+    return rowData.map(row => {
       api.delete(`/students/${row._id}`).then(() => {
         apiData();
       })
@@ -30,7 +30,7 @@ export const StudentsTable = ({ students, apiData, title }) => {
   }
 
   const removeAuthStudents = async (event, rowData) => {
-    rowData.map(row => {
+   return rowData.map(row => {
       api.put(`/students/permission/no/${row._id}`).then(() => {
         apiData();
       })
@@ -38,7 +38,7 @@ export const StudentsTable = ({ students, apiData, title }) => {
   }
 
   const authStudents = async (event, rowData) => {
-    rowData.map(row => {
+   return rowData.map(row => {
       api.put(`/students/permission/yes/${row._id}`).then(() => {
         apiData();
       })

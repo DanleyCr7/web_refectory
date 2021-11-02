@@ -1,5 +1,5 @@
 import React from 'react';
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
 import api from '../services/api';
 import { createTheme } from '@material-ui/core';

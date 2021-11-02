@@ -22,16 +22,19 @@ import Turmas from './pages/turmas';
 import EditTurmas from './pages/turmas/edit';
 import EditCursos from './pages/cursos/edit';
 
+const user = JSON.parse(localStorage.getItem('@ifpi/user'));
+
 const Routes = _ => (
+
   <Switch>
-    <Route path='/' exact component={Main} />
+    <Route path='/' exact component={user ? Menu : LoginProfessor} />
     <Route path='/menu' component={Menu} />
     <Route path='/checkin' component={Checkin} />
     <Route path='/warning' component={Warning} />
     <Route path='/lack' component={Lack} />
     <Route path='/reserveStudent' component={ReservaTableStudent} />
     <Route path='/registerProf' component={RegisterProf} />
-    <Route path='/loginProfessor' component={LoginProfessor} />
+    <Route path='/loginProfessor' component={Main} />
     <Route path='/reservasTurmas' component={ReservasTurmas} />
     <Route path='/StudentsRegister' component={StudentsRegister} />
     <Route path='/RegisterCourser' component={RegisterCourser} />

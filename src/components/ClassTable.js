@@ -1,5 +1,5 @@
 import React from 'react';
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
 import api from '../services/api';
 import { createTheme } from '@material-ui/core';
@@ -22,7 +22,7 @@ export const ClassTable = ({ classes, apiData, title }) => {
 
 
   const deleteClasses = async (event, rowData) => {
-    rowData.map(row => {
+    return rowData.map(row => {
       api.delete(`/class/${row._id}`).then(() => {
         apiData();
       })
@@ -31,9 +31,9 @@ export const ClassTable = ({ classes, apiData, title }) => {
 
 
   const editClasses = async (event, rowData) => {
-    console.log(rowData[0]._id);
     const id = rowData[0]._id;
     history.push(`/class/edit/${id}`);
+    return rowData;
   }
 
   return (
@@ -63,7 +63,7 @@ export const ClassTable = ({ classes, apiData, title }) => {
         options={{
           selection: true,
           filtering: true,
-          selectionProps: rowData => ({
+          selectionProps: _ => ({
             color: 'primary',
           }),
           headerStyle: {

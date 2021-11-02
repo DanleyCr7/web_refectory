@@ -5,6 +5,7 @@ import api from '../../services/api';
 
 const Main = _ => {
   const [classes, setClasses] = useState([]);
+  const user = localStorage.getItem('@ifpi/user');
 
   const apiData = async _ => {
     try {
