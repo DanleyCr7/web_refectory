@@ -4,9 +4,9 @@ import Check from '../../components/check';
 
 const Checkin = _ => {
   return (
-    <main style={{flexGrow: 1, backgroundColor: '#fff'}}>
+    <main style={{ flexGrow: 1, padding: '15px', backgroundColor: '#fff' }}>
       <div style={{
-        height: '64px', 
+        height: '64px',
       }}
       />
       <Check />

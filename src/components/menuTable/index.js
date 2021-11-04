@@ -5,10 +5,24 @@ import { format, addDays } from 'date-fns'
 import api from '../../services/api';
 import settingsText from '../../config/settingsText';
 import Snackbar from '../snackbar';
+import { createTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 
 import { date, month, year } from './date'
 
 const MenuTable = _ => {
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#2AB083',
+      },
+      secondary: {
+        main: '#333',
+      },
+    },
+  });
+
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
@@ -170,40 +184,44 @@ const MenuTable = _ => {
   return (
     <>
       <Snackbar open={open} setOpen={setOpen} variant={'warning'} msg={'Preencha todos os campos'} />
-      <MaterialTable
-        title='Cardápio Refeitório'
-        columns={state.columns}
-        data={state.data}
-        editable={{
-          onRowAdd: newData =>
-            new Promise((resolve, reject) => {
-              if (!newData) {
-                // alert('required');
-                setOpen(true)
-                reject();
-              } else {
-                rowAdd(newData)
-                resolve()
-              }
-            }),
-          onRowUpdate: rowUpdate,
-          onRowDelete: rowDelete,
-        }}
-        style={{ zIndex: 0, }}
-        localization={settingsText}
-        options={{
-          sorting: false,
-          actionsColumnIndex: -1,
-          pageSize: 10,
-          headerStyle: {
-            backgroundColor: '#2FA23B',
-            color: '#eee',
-            fontSize: '1em',
-            zIndex: 8
-          },
+      <ThemeProvider theme={theme}>
+        <MaterialTable
+          title='Cardápio Refeitório'
+          columns={state.columns}
+          data={state.data}
+          editable={{
+            onRowAdd: newData =>
+              new Promise((resolve, reject) => {
+                if (!newData) {
+                  // alert('required');
+                  setOpen(true)
+                  reject();
+                } else {
+                  rowAdd(newData)
+                  resolve()
+                }
+              }),
+            onRowUpdate: rowUpdate,
+            onRowDelete: rowDelete,
+          }}
+          style={{ zIndex: 0, }}
+          localization={settingsText}
+          options={{
+            selection: true,
+            sorting: false,
+            actionsColumnIndex: -1,
+            pageSize: 10,
+            headerStyle: {
+              backgroundColor: '#2FA23B',
+              color: '#eee',
+              fontSize: '1em',
+              zIndex: 8
+            },
 
-        }}
-      />
+          }}
+        />
+
+      </ThemeProvider>
     </>
   );
 }

@@ -19,6 +19,7 @@ import Professores from './pages/professores';
 import EditProfessores from './pages/professores/edit';
 import Cursos from './pages/cursos';
 import Turmas from './pages/turmas';
+import ConfirmReservation from './pages/confirmReservationTeacher';
 import EditTurmas from './pages/turmas/edit';
 import EditCursos from './pages/cursos/edit';
 
@@ -48,6 +49,7 @@ const Routes = _ => (
     <Route path='/courses/edit/:id' component={EditCursos} />
     <Route path='/teachers/edit/:id' component={EditProfessores} />
     <Route path='/class/edit/:id' component={EditTurmas} />
+    <Route path="/class/reservation/:id" component={ConfirmReservation} />
   </Switch>
 );
 
