@@ -6,7 +6,7 @@ import { createTheme } from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 
-export const ClassReservationTable = ({ classes, apiData, title }) => {
+export const ClassReservationTable = ({ reservations, apiData, title }) => {
   const history = useHistory();
 
   const theme = createTheme({
@@ -20,11 +20,6 @@ export const ClassReservationTable = ({ classes, apiData, title }) => {
     },
   });
 
-  const reservationClass = async (event, rowData) => {
-    console.log(rowData._id);
-    history.push(`/class/reservation/${rowData._id}`);
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <MaterialTable
@@ -36,15 +31,12 @@ export const ClassReservationTable = ({ classes, apiData, title }) => {
           { title: 'Turno', field: 'shift', filtering: false },
           { title: 'Curso', field: 'course.name', filtering: false },
         ]}
-        data={classes}
+        data={reservations}
         actions={[
-          {
-            icon: 'done',
-            tooltip: 'Agendar turma(s)',
-            onClick: reservationClass,
-          },
+
         ]}
         options={{
+          selection: true,
           filtering: true,
           selectionProps: _ => ({
             color: 'primary',

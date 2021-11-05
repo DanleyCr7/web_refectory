@@ -7,29 +7,29 @@ import api from '../../services/api';
 const Main = _ => {
   const [studentsReserve, setStudentsReserve] = useState([]);
 
-  useEffect(()=>{
-    api.get('reserves').then(resp=>{
-        console.log(resp.data)
-        setStudentsReserve(resp.data)
-    }).catch(error=>{
+  useEffect(() => {
+    api.get('reserves').then(resp => {
+      console.log(resp.data)
+      setStudentsReserve(resp.data)
+    }).catch(error => {
       console.log(error)
     })
-   },[])
+  }, [])
 
   return (
     <>
-      <main style={{flexGrow: 1}}>
+      <main style={{ flexGrow: 1, padding: '15px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
           padding: '0 8px',
           minHeight: '64px',
-          }}
+        }}
         />
-        <ReservaTableStudent 
-          students={studentsReserve} 
-          title='Reserva dos alunos' 
+        <ReservaTableStudent
+          students={studentsReserve}
+          title='Reserva dos alunos'
         />
       </main>
       <CountMeal />

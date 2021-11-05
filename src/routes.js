@@ -10,7 +10,6 @@ import Lack from './pages/lack';
 import ReservaTableStudent from './pages/reserveListStudent';
 import RegisterProf from './pages/registerProf';
 import Auth from './pages/loginProfessor';
-import ReservasTurmas from './pages/reservasTurmas';
 import StudentsRegister from './pages/studentsRegister';
 import RegisterCourser from './pages/registerCourser';
 import RegisterClasses from './pages/registerClasses';
@@ -36,7 +35,6 @@ const Routes = _ => (
     <Route path='/reserveStudent' component={ReservaTableStudent} />
     <Route path='/registerProf' component={RegisterProf} />
     <Route path='/auth' component={Auth} />
-    <Route path='/reservasTurmas' component={ReservasTurmas} />
     <Route path='/StudentsRegister' component={StudentsRegister} />
     <Route path='/RegisterCourser' component={RegisterCourser} />
     <Route path='/RegisterClasses' component={RegisterClasses} />

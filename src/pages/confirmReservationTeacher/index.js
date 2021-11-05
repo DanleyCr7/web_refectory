@@ -7,13 +7,22 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core';
 import api from '../../services/api';
 import { useParams } from 'react-router';
+import { useHistory } from 'react-router';
+
 const useStyles = makeStyles({
   button: {
     backgroundColor: '#17871d',
     color: '#fff',
     marginTop: 15,
-
   },
+
+  buttonBack: {
+    backgroundColor: '#ccc',
+    color: 'black',
+    marginTop: 15,
+    marginLeft: 10,
+  },
+
   margin: {
     marginTop: 80,
     paddingLeft: 15
@@ -21,16 +30,20 @@ const useStyles = makeStyles({
 
   textField: {
     width: '90%',
-
   },
 });
 
 export default function Confirm() {
+  const history = useHistory();
   const [data, setData] = useState("");
   const { id } = useParams();
   const classes = useStyles();
 
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
+
+  const back = () => {
+    history.push('/Turmas');
+  }
 
   const register = async (event) => {
     event.preventDefault()
@@ -44,39 +57,24 @@ export default function Confirm() {
     }).then(resp => {
       alert(resp?.data?.message);
       console.log(resp?.data?.message)
-      // window.location.href = "/reservasTurmas";
+      window.location.href = "/Turmas";
     }).catch(error => {
-      // alert('Ops, aconteceu algum erro no agendamento!');
+      alert('Ops, aconteceu algum erro no agendamento!');
     })
   }
 
-  // const register = async (event) => {
-  //   event.preventDefault()
-  //   let data = event.target;
-
-  //   console.log({
-  //     name: data?.name?.value,
-  //   })
-  //   await api.post('/courses', {
-  //     name: data?.name?.value,
-  //   }).then(resp => {
-  //     alert('Curso cadastrado com sucesso');
-  //     window.location.reload();
-  //   }).catch(error => {
-  //     alert('Ops, aconteceu algum erro no cadastro!');
-  //   })
-  // }
   return (
 
     <form onSubmit={register}>
       <Grid className={classes.margin} xs={12} container>
         <Grid xs={12} sm={12}>
           <Typography variant="h6">
-            Confirma angendamento
+            Confirmar agendamento
           </Typography>
         </Grid>
 
         <TextField
+          style={{ margin: '15px 0px' }}
           id="date"
           label="Data"
           type="date"
@@ -89,7 +87,9 @@ export default function Confirm() {
 
         <Grid item xs={12} sm={12}>
           <Button type="submit" disabled={data ? false : true} className={classes.button} >Confirma</Button>
+          <Button type="button" onClick={back} className={classes.buttonBack} >Voltar</Button>
         </Grid>
+
       </Grid>
     </form >
   );

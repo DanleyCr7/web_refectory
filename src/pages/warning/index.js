@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import WarningTable from '../../components/warningTable';
-const Warning = _ => {
-    const [ requested ]= useState([])
-    const [ accepted ]= useState([]) 
 
-   
+const Warning = _ => {
+    const [reservations, setReservations] = useState([]);
+
+    const apiData = async _ => {
+        try {
+            const resp = await api.get('/reservations');
+            setReservations(resp.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        apiData();
+    }, [])
+
     return (
-        <main style={{ flexGrow: 1 }}>
+        <main style={{ flexGrow: 1, padding: '15px' }}>
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -15,8 +28,8 @@ const Warning = _ => {
                 minHeight: '64px',
             }}
             />
-            <WarningTable title="Reservas solicitadas" data={requested} />
-            <WarningTable title="Reservas aceitas"  data={accepted}/>
+            <WarningTable title="Reservas dos professores" data={reservations} apiData={apiData} />
+            {/* <WarningTable title="Reservas aceitas" data={accepted} /> */}
         </main>
     );
 }

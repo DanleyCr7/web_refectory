@@ -20,20 +20,22 @@ export const ClassTable = ({ classes, apiData, title }) => {
     },
   });
 
-
   const deleteClasses = async (event, rowData) => {
-    return rowData.map(row => {
+    rowData.map(row => {
       api.delete(`/class/${row._id}`).then(() => {
         apiData();
       })
     });
   }
 
+  const reservationClass = async (event, rowData) => {
+    console.log(rowData);
+    history.push(`/class/reservation/${rowData[0]._id}`);
+  }
 
   const editClasses = async (event, rowData) => {
     const id = rowData[0]._id;
     history.push(`/class/edit/${id}`);
-    return rowData;
   }
 
   return (
@@ -58,6 +60,11 @@ export const ClassTable = ({ classes, apiData, title }) => {
             icon: 'edit',
             tooltip: 'Editar turma',
             onClick: editClasses,
+          },
+          {
+            icon: 'done',
+            tooltip: 'Reservar turma',
+            onClick: reservationClass,
           }
         ]}
         options={{
