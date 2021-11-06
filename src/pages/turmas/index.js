@@ -32,7 +32,6 @@ const Main = _ => {
           minHeight: '64px',
         }}
         />
-
         <ClassTable
           classes={classes}
           apiData={apiData}
