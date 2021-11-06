@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
+import api from '../services/api';
 import MaterialTable from 'material-table'
-import api from '../../services/api';
-import { useHistory } from 'react-router';
 
-import settingsDefaultText from '../../config/settingsText'
+import settingsDefaultText from '../config/settingsText'
 
-export const WarningTable = ({ data, title, apiData }) => {
-  const history = useHistory();
-
+export const MinhasReservasTable = ({ data, title, apiData }) => {
   const [state, setState] = useState({
     collumns: [
       { title: 'Professor', field: 'teacher_id.name' },
@@ -19,12 +16,11 @@ export const WarningTable = ({ data, title, apiData }) => {
     ],
   })
 
-  const doneReservation = (event, rowData) => {
-    api.put(`/reservations/${rowData._id}`).then(() => {
+  const deleteReservation = async (event, rowData) => {
+    console.log(rowData);
+    api.delete(`/reservations/${rowData._id}`).then(() => {
       apiData();
-    }).catch((error) => {
-      alert(error);
-    });
+    })
   }
 
   return (
@@ -34,9 +30,9 @@ export const WarningTable = ({ data, title, apiData }) => {
       data={data}
       actions={[
         {
-          icon: 'check',
-          tooltip: 'Aceitar',
-          onClick: doneReservation
+          icon: 'delete',
+          tooltip: 'Deletar',
+          onClick: deleteReservation
         }
       ]}
       localization={settingsDefaultText}
@@ -55,4 +51,4 @@ export const WarningTable = ({ data, title, apiData }) => {
   )
 }
 
-export default WarningTable;
+export default MinhasReservasTable;

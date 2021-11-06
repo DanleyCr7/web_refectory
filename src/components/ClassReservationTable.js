@@ -6,7 +6,7 @@ import { createTheme } from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 
-export const ClassTable = ({ classes, apiData, title }) => {
+export const ClassReservationTable = ({ reservations, apiData, title }) => {
   const history = useHistory();
 
   const theme = createTheme({
@@ -20,24 +20,6 @@ export const ClassTable = ({ classes, apiData, title }) => {
     },
   });
 
-  const deleteClasses = async (event, rowData) => {
-    rowData.map(row => {
-      api.delete(`/class/${row._id}`).then(() => {
-        apiData();
-      })
-    });
-  }
-
-  const reservationClass = async (event, rowData) => {
-    console.log(rowData);
-    history.push(`/class/reservation/${rowData[0]._id}`);
-  }
-
-  const editClasses = async (event, rowData) => {
-    const id = rowData[0]._id;
-    history.push(`/class/edit/${id}`);
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <MaterialTable
@@ -49,23 +31,9 @@ export const ClassTable = ({ classes, apiData, title }) => {
           { title: 'Turno', field: 'shift', filtering: false },
           { title: 'Curso', field: 'course.name', filtering: false },
         ]}
-        data={classes}
+        data={reservations}
         actions={[
-          {
-            icon: 'delete',
-            tooltip: 'Deletar turma',
-            onClick: deleteClasses,
-          },
-          {
-            icon: 'edit',
-            tooltip: 'Editar turma',
-            onClick: editClasses,
-          },
-          {
-            icon: 'done',
-            tooltip: 'Reservar turma',
-            onClick: reservationClass,
-          }
+
         ]}
         options={{
           selection: true,

@@ -1,9 +1,9 @@
 import React from 'react';
 import TableLack from '../../components/tableLack';
-const Lack =_=>{
-    return(
-        <main style={{flexGrow: 1}}>
-         <div style={{
+const Lack = _ => {
+    return (
+        <main style={{ flexGrow: 1, padding: '15px' }}>
+            <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
@@ -11,7 +11,7 @@ const Lack =_=>{
                 minHeight: '64px',
             }}
             />
-          <TableLack/>
+            <TableLack />
         </main>
     )
 }

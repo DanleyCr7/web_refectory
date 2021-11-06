@@ -10,7 +10,6 @@ import Lack from './pages/lack';
 import ReservaTableStudent from './pages/reserveListStudent';
 import RegisterProf from './pages/registerProf';
 import Auth from './pages/loginProfessor';
-import ReservasTurmas from './pages/reservasTurmas';
 import StudentsRegister from './pages/studentsRegister';
 import RegisterCourser from './pages/registerCourser';
 import RegisterClasses from './pages/registerClasses';
@@ -19,13 +18,14 @@ import Professores from './pages/professores';
 import EditProfessores from './pages/professores/edit';
 import Cursos from './pages/cursos';
 import Turmas from './pages/turmas';
+import ConfirmReservation from './pages/confirmReservationTeacher';
 import EditTurmas from './pages/turmas/edit';
 import EditCursos from './pages/cursos/edit';
+import MinhasReservas from './pages/minhasReservas';
 
 const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
 const Routes = _ => (
-
   <Switch>
     <Route path='/' exact component={Main} />
     <Route path='/menu' component={Menu} />
@@ -35,7 +35,6 @@ const Routes = _ => (
     <Route path='/reserveStudent' component={ReservaTableStudent} />
     <Route path='/registerProf' component={RegisterProf} />
     <Route path='/auth' component={Auth} />
-    <Route path='/reservasTurmas' component={ReservasTurmas} />
     <Route path='/StudentsRegister' component={StudentsRegister} />
     <Route path='/RegisterCourser' component={RegisterCourser} />
     <Route path='/RegisterClasses' component={RegisterClasses} />
@@ -48,6 +47,8 @@ const Routes = _ => (
     <Route path='/courses/edit/:id' component={EditCursos} />
     <Route path='/teachers/edit/:id' component={EditProfessores} />
     <Route path='/class/edit/:id' component={EditTurmas} />
+    <Route path="/class/reservation/:id" component={ConfirmReservation} />
+    <Route path="/minhasReservas" component={MinhasReservas} />
   </Switch>
 );
 

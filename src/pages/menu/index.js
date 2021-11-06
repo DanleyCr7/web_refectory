@@ -6,14 +6,14 @@ import CountMeal from '../../components/countMeal';
 const Menu = _ => {
   return (
     <>
-      <main style={{flexGrow: 1}}>
+      <main style={{ flexGrow: 1, padding: '15px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
           padding: '0 8px',
           minHeight: '64px',
-          }}
+        }}
         />
         <MenuTable />
       </main>

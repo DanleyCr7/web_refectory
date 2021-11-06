@@ -23,7 +23,7 @@ const Main = _ => {
 
   return (
     <>
-      <main style={{ flexGrow: 1 }}>
+      <main style={{ flexGrow: 1, padding: '15px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',

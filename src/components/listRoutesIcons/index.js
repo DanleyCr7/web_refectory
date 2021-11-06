@@ -40,14 +40,13 @@ export const RouteList = _ => {
   const [collapsibleReserve, setcollapsibleReserve] = useState(false);
   const [collapsibleRegister, setcollapsibleRegister] = useState(false);
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
-  
-  
+
   const classes = useStyles();
   return (
     <List>
       {user ?
         <>
-        {/* Admin */}
+          {/* Admin */}
           {user?.permission === 'admin' &&
             <>
               <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
@@ -58,7 +57,7 @@ export const RouteList = _ => {
                   <ListItemText primary='Principal' />
                 </ListItem>
               </Link>
-      
+
               <Link className={classes.list} to='/menu' color='inherit' underline='none' component={RouterLink}>
                 <ListItem>
                   <ListItemIcon>
@@ -95,54 +94,63 @@ export const RouteList = _ => {
               </Link>
             </>
           }
-      {/* Admin */}
-      <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
-        <ListItem>
-          <ListItemIcon>
-            <Person />
-          </ListItemIcon>
-          <ListItemText primary='Turmas' />
-        </ListItem>
-      </Link>
-      {/* Collapsible de reservas */}
-      <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleReserve(!collapsibleReserve)}>
-        <ListItem>
-          <ListItemIcon>
-            {collapsibleReserve ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-          </ListItemIcon>
-          <ListItemText primary='Reservas' />
-        </ListItem>
-      </Link>
 
-      <Collapsible open={collapsibleReserve}>
-        {user?.permission  === 'admin' &&
-        <>      
-        <Link className={classes.list} to='/warning' color='inherit' underline='none' component={RouterLink}>
-          <ListItem>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary='Reservas' />
-          </ListItem>
-        </Link>
-        <Link className={classes.list} to='/reserveStudent' color='inherit' underline='none' component={RouterLink}>
-          <ListItem>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary='Reservas de alunos' />
-          </ListItem>
-        </Link>
-        </>
-        }
-        <Link className={classes.list} to='/reservasTurmas' color='inherit' underline='none' component={RouterLink}>
-          <ListItem>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary='Reservar turma' />
-          </ListItem>
-        </Link>
-      </Collapsible>
-      {/* Collapsible de reservas */}
-      {/* Collapsible de cadastros */}
+          <>
+            <Link className={classes.list} to='/minhasReservas' color='inherit' underline='none' component={RouterLink}>
+              <ListItem >
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary='Minhas Reservas' />
+              </ListItem>
+            </Link>
+          </>
+
+          {/* Admin */}
+          <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
+            <ListItem>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText primary='Turmas' />
+            </ListItem>
+          </Link>
+
+          {/* Collapsible de reservas */}
+          {user?.permission === 'admin' &&
+            <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleReserve(!collapsibleReserve)}>
+              <ListItem>
+                <ListItemIcon>
+                  {collapsibleReserve ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                </ListItemIcon>
+                <ListItemText primary='Reservas' />
+              </ListItem>
+            </Link>
+          }
+
+          <Collapsible open={collapsibleReserve}>
+            {user?.permission === 'admin' &&
+              <>
+                <Link className={classes.list} to='/warning' color='inherit' underline='none' component={RouterLink}>
+                  <ListItem>
+                    <ListItemIcon>
+                    </ListItemIcon>
+                    <ListItemText primary='Professores' />
+                  </ListItem>
+                </Link>
+                <Link className={classes.list} to='/reserveStudent' color='inherit' underline='none' component={RouterLink}>
+                  <ListItem>
+                    <ListItemIcon>
+                    </ListItemIcon>
+                    <ListItemText primary='Alunos' />
+                  </ListItem>
+                </Link>
+              </>
+            }
+          </Collapsible>
+
+          {/* Collapsible de reservas */}
+          {/* Collapsible de cadastros */}
           {user?.permission === 'admin' &&
             <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleRegister(!collapsibleRegister)}>
               <ListItem>
@@ -152,47 +160,47 @@ export const RouteList = _ => {
                 <ListItemText primary='Cadastros' />
               </ListItem>
             </Link>
-       }
-      <Collapsible open={collapsibleRegister}>
-        <Link className={classes.list} to='/registerProf' color='inherit' underline='none' component={RouterLink}>
+          }
+          <Collapsible open={collapsibleRegister}>
+            <Link className={classes.list} to='/registerProf' color='inherit' underline='none' component={RouterLink}>
+              <ListItem>
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary='Registrar professor' />
+              </ListItem>
+            </Link>
+            <Link className={classes.list} to='/RegisterCourser' color='inherit' underline='none' component={RouterLink}>
+              <ListItem>
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary='Registrar curso' />
+              </ListItem>
+            </Link>
+            <Link className={classes.list} to='/RegisterClasses' color='inherit' underline='none' component={RouterLink}>
+              <ListItem>
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary='Registrar turma  ' />
+              </ListItem>
+            </Link>
+            <Link className={classes.list} to='/registerStudent' color='inherit' underline='none' component={RouterLink}>
+              <ListItem>
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary='Registrar aluno' />
+              </ListItem>
+            </Link>
+          </Collapsible>
+        </>
+        :
+        <Link className={classes.list} to='/auth' color='inherit' underline='none' component={RouterLink}>
           <ListItem>
             <ListItemIcon>
+              <LockOpen />
             </ListItemIcon>
-            <ListItemText primary='Registrar professor' />
+            <ListItemText primary='Acesso' />
           </ListItem>
-        </Link>
-        <Link className={classes.list} to='/RegisterCourser' color='inherit' underline='none' component={RouterLink}>
-          <ListItem>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary='Registrar curso' />
-          </ListItem>
-        </Link>
-        <Link className={classes.list} to='/RegisterClasses' color='inherit' underline='none' component={RouterLink}>
-          <ListItem>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary='Registrar turma  ' />
-          </ListItem>
-        </Link>
-        <Link className={classes.list} to='/registerStudent' color='inherit' underline='none' component={RouterLink}>
-          <ListItem>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary='Registrar aluno' />
-          </ListItem>
-        </Link>
-      </Collapsible>
-       </>
-      :
-      <Link className={classes.list} to='/auth' color='inherit' underline='none' component={RouterLink}>
-        <ListItem>
-          <ListItemIcon>
-            <LockOpen />
-          </ListItemIcon>
-          <ListItemText primary='Acesso' />
-        </ListItem>
-      </Link> }
+        </Link>}
       <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
