@@ -94,6 +94,18 @@ export const RouteList = _ => {
               </Link>
             </>
           }
+
+          <>
+            <Link className={classes.list} to='/minhasReservas' color='inherit' underline='none' component={RouterLink}>
+              <ListItem >
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary='Minhas Reservas' />
+              </ListItem>
+            </Link>
+          </>
+
           {/* Admin */}
           <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
             <ListItem>
@@ -103,15 +115,18 @@ export const RouteList = _ => {
               <ListItemText primary='Turmas' />
             </ListItem>
           </Link>
+
           {/* Collapsible de reservas */}
-          <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleReserve(!collapsibleReserve)}>
-            <ListItem>
-              <ListItemIcon>
-                {collapsibleReserve ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-              </ListItemIcon>
-              <ListItemText primary='Reservas' />
-            </ListItem>
-          </Link>
+          {user?.permission === 'admin' &&
+            <Link style={{ textDecoration: 'none' }} className={classes.collapsible} onClick={() => setcollapsibleReserve(!collapsibleReserve)}>
+              <ListItem>
+                <ListItemIcon>
+                  {collapsibleReserve ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                </ListItemIcon>
+                <ListItemText primary='Reservas' />
+              </ListItem>
+            </Link>
+          }
 
           <Collapsible open={collapsibleReserve}>
             {user?.permission === 'admin' &&

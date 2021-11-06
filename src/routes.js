@@ -21,11 +21,11 @@ import Turmas from './pages/turmas';
 import ConfirmReservation from './pages/confirmReservationTeacher';
 import EditTurmas from './pages/turmas/edit';
 import EditCursos from './pages/cursos/edit';
+import MinhasReservas from './pages/minhasReservas';
 
 const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
 const Routes = _ => (
-
   <Switch>
     <Route path='/' exact component={Main} />
     <Route path='/menu' component={Menu} />
@@ -48,6 +48,7 @@ const Routes = _ => (
     <Route path='/teachers/edit/:id' component={EditProfessores} />
     <Route path='/class/edit/:id' component={EditTurmas} />
     <Route path="/class/reservation/:id" component={ConfirmReservation} />
+    <Route path="/minhasReservas" component={MinhasReservas} />
   </Switch>
 );
 
