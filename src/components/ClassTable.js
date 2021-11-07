@@ -48,9 +48,7 @@ export const ClassTable = ({ classes, apiData, title }) => {
   };
 
   const reservationClass = async (event, rowData) => {
-    // setClassSelect(rowData);
-    handleDialog();
-    // history.push(`/class/reservation/${classSelect._id}`);
+    history.push(`/class/reservation/${rowData._id}`);
   }
 
   const editClasses = async (event, rowData) => {

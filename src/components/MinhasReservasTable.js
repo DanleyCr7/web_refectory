@@ -4,7 +4,7 @@ import MaterialTable from 'material-table'
 
 import settingsDefaultText from '../config/settingsText'
 
-export const MinhasReservasTable = ({ data, title, apiData }) => {
+export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => {
   const [state, setState] = useState({
     collumns: [
       { title: 'Professor', field: 'teacher_id.name' },
@@ -23,6 +23,7 @@ export const MinhasReservasTable = ({ data, title, apiData }) => {
     })
   }
 
+
   return (
     <MaterialTable
       title={title}
@@ -33,6 +34,11 @@ export const MinhasReservasTable = ({ data, title, apiData }) => {
           icon: 'delete',
           tooltip: 'Deletar',
           onClick: deleteReservation
+        },
+        {
+          icon: 'visibility',
+          tooltip: 'Detalhe',
+          onClick: handlerDialog
         }
       ]}
       localization={settingsDefaultText}
