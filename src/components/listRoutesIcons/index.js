@@ -95,16 +95,18 @@ export const RouteList = _ => {
             </>
           }
 
-          <>
-            <Link className={classes.list} to='/minhasReservas' color='inherit' underline='none' component={RouterLink}>
-              <ListItem >
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary='Minhas Reservas' />
-              </ListItem>
-            </Link>
-          </>
+          {user?.permission == 'professor' &&
+            <>
+              <Link className={classes.list} to='/minhasReservas' color='inherit' underline='none' component={RouterLink}>
+                <ListItem >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Minhas Reservas' />
+                </ListItem>
+              </Link>
+            </>
+          }
 
           {/* Admin */}
           <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>

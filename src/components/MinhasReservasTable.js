@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import api from '../services/api';
 import MaterialTable from 'material-table'
-
+import {useHistory} from 'react-router-dom';
 import settingsDefaultText from '../config/settingsText'
 
 export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => {
+  const history = useHistory();
+
+  console.log(data)
+
   const [state, setState] = useState({
     collumns: [
       { title: 'Professor', field: 'teacher_id.name' },
@@ -23,6 +27,9 @@ export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => 
     })
   }
 
+  const selectStudents = async (event, rowData) => {
+    history.push(`/confirmStudentsReservations/${rowData.class_id._id}/${rowData._id}`);
+  }
 
   return (
     <MaterialTable
@@ -36,10 +43,10 @@ export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => 
           onClick: deleteReservation
         },
         {
-          icon: 'visibility',
-          tooltip: 'Detalhe',
-          onClick: handlerDialog
-        }
+          icon: 'add_circle',
+          tooltip: 'Adicionar alunos',
+          onClick: selectStudents
+        },
       ]}
       localization={settingsDefaultText}
       options={{
@@ -53,6 +60,29 @@ export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => 
           zIndex: 8,
         }
       }}
+      detailPanel={[
+        {
+          tooltip: 'Exibir Alunos',
+          render: rowData => {
+            return (
+              <div
+                style={{
+                  fontSize: 15,
+                  textAlign: 'left',
+                  color: 'gray',
+                }}
+              >
+               <ul style={{ listStyleType: 'none' }}>
+                  { rowData.students.map(student => <li key={student._id}>
+                    <p>Nome: {student.name} | Email: {student.email} | Telefone: {student.phone}</p>
+                    <hr/>
+                  </li> )}
+                </ul>
+              </div>
+            )
+          },
+        },
+      ]}
     />
   )
 }

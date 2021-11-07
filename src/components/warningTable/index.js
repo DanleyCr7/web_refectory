@@ -27,6 +27,22 @@ export const WarningTable = ({ data, title, apiData }) => {
     });
   }
 
+  const notApprovedReservation = (event, rowData) => {
+    api.put(`/reservations/disapprove/${rowData._id}`).then(() => {
+      apiData();
+    }).catch((error) => {
+      alert(error);
+    });
+  }
+
+  const deleteReservation = (event, rowData) => {
+    api.delete(`/reservations/${rowData._id}`).then(() => {
+      apiData();
+    }).catch((error) => {
+      alert(error);
+    });
+  }
+
   return (
     <MaterialTable
       title={title}
@@ -37,7 +53,17 @@ export const WarningTable = ({ data, title, apiData }) => {
           icon: 'check',
           tooltip: 'Aceitar',
           onClick: doneReservation
-        }
+        },
+        {
+          icon: 'delete',
+          tooltip: 'Deletar',
+          onClick: deleteReservation
+        },
+        {
+          icon: 'warning',
+          tooltip: 'Remover autorização',
+          onClick: notApprovedReservation,
+        },
       ]}
       localization={settingsDefaultText}
       options={{

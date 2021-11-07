@@ -33,10 +33,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const ClassTable = ({ classes, apiData, title }) => {
   const history = useHistory();
+
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
+
   const [classSelect, setClassSelect] = useState({});
   const [open, setOpen] = useState(false);
   const classesNa = useStyles();
+
   const deleteClasses = async (event, rowData) => {
       api.delete(`/class/${rowData._id}`).then(() => {
         apiData();
@@ -57,29 +60,29 @@ export const ClassTable = ({ classes, apiData, title }) => {
   }
 
   const actionAdmin = [
-          {
-            icon: 'delete',
-            tooltip: 'Deletar turma',
-            onClick: deleteClasses,
-          },
-          {
-            icon: 'edit',
-            tooltip: 'Editar turma',
-            onClick: editClasses,
-          },
-          {
-            icon: 'done',
-            tooltip: 'Reservar turma',
-            onClick: reservationClass,
-          }
+    {
+      icon: 'delete',
+      tooltip: 'Deletar turma',
+      onClick: deleteClasses,
+    },
+    {
+      icon: 'edit',
+      tooltip: 'Editar turma',
+      onClick: editClasses,
+    },
+    {
+      icon: 'done',
+      tooltip: 'Reservar turma',
+      onClick: reservationClass,
+    }
   ]
 
   const actionsTeacher = [
-          {
-            icon: 'done',
-            tooltip: 'Reservar turma',
-            onClick: reservationClass,
-          }
+    {
+      icon: 'done',
+      tooltip: 'Reservar turma',
+      onClick: reservationClass,
+    }
   ]
 
   return (

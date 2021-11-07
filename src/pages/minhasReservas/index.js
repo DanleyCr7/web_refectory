@@ -10,7 +10,6 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
-
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -40,6 +39,7 @@ const Main = _ => {
   const [reservations, setReservations] = useState([]);
   const [studentsNot, setStudentsNot] = useState(['', '']);
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
+  
   const handlerDialog = async (event, reserve) => {
     if (!open) {
       const response = await api.get(`reservationDetail/${reserve._id}`);
@@ -47,6 +47,7 @@ const Main = _ => {
     }
     setOpen(!open);
   }
+
   const apiData = async _ => {
     try {
       const resp = await api.get(`/reservations/${user._id}`);
