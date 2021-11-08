@@ -11,6 +11,7 @@ const ConfirmReservationTeacher = () => {
   const history = useHistory();
   const { id_class, id_reservation } = useParams();
   const [students, setStudents] = useState([]);
+  const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
   const theme = createTheme({
     palette: {
@@ -22,6 +23,7 @@ const ConfirmReservationTeacher = () => {
       },
     },
   });
+
 
   const apiData = async () => {
     try {
@@ -37,12 +39,27 @@ const ConfirmReservationTeacher = () => {
   }, []);
 
   const confirmStudents = async (event, rowData) => {
-    rowData.map(student => {
-      api.put(`/reservations/class/students/${id_reservation}`, {
-        id_student: student._id
+    if(user.permission === 'professor') {
+      console.log('caiu aqui professor')
+      rowData.map((student) => {
+        api.put(`/reservations/class/students/${id_reservation}`, {
+          id_student: student._id
+        }).then(() => {
+          history.push('/minhasReservas');
+        })
       })
-    })
-    history.push('/minhasReservas');
+    }   
+
+    if(user.permission === 'admin') {
+      console.log('caiu aqui no admin');
+      rowData.map((student) => {
+        api.put(`/admin/reservations/class/${id_reservation}`, {
+          id_student: student._id
+        }).then(() => {
+         history.push('/admin/minhasReservas');
+        })
+      })
+    }
   }
 
   return (

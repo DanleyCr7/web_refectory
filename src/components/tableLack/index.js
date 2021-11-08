@@ -31,7 +31,7 @@ const TableLack =_=>{
            data={state.data}    
            options={{
                sorting: false,
-               pageSize: 10,
+               pageSize: 5,
                actionsColumnIndex: -1,
                headerStyle:{
                    backgroundColor: '#2FA23B',

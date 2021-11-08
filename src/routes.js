@@ -18,10 +18,13 @@ import Professores from './pages/professores';
 import EditProfessores from './pages/professores/edit';
 import Cursos from './pages/cursos';
 import Turmas from './pages/turmas';
+import TurmasAdmin from './pages/turmasAdmin';
 import ConfirmReservation from './pages/confirmReservationTeacher';
+import ConfirmReservationAdmin from './pages/confirmReservationAdmin';
 import EditTurmas from './pages/turmas/edit';
 import EditCursos from './pages/cursos/edit';
 import MinhasReservas from './pages/minhasReservas';
+import MinhasReservasAdmin from './pages/minhasReservasAdmin';
 import ConfirmStudentsReservations from './pages/confirmStudentsInReservation';
 
 const user = JSON.parse(localStorage.getItem('@ifpi/user'));
@@ -49,8 +52,11 @@ const Routes = _ => (
     <Route path='/teachers/edit/:id' component={EditProfessores} />
     <Route path='/class/edit/:id' component={EditTurmas} />
     <Route path="/class/reservation/:id" component={ConfirmReservation} />
+    <Route path="/admin/class/reservation/:id" component={ConfirmReservationAdmin} />
     <Route path="/minhasReservas" component={MinhasReservas} />
     <Route path='/confirmStudentsReservations/:id_class/:id_reservation' component={ConfirmStudentsReservations} />
+    <Route path="/turmasAdmin" component={TurmasAdmin} />
+    <Route path="/admin/minhasReservas" component={MinhasReservasAdmin} />
   </Switch>
 );
 

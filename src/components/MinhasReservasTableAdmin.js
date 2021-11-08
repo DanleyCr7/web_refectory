@@ -4,14 +4,14 @@ import MaterialTable from 'material-table'
 import {useHistory} from 'react-router-dom';
 import settingsDefaultText from '../config/settingsText'
 
-export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => {
+export const MinhasReservasTableAdmin = ({ handlerDialog, data, title, apiData }) => {
   const history = useHistory();
 
   console.log(data)
 
   const [state, setState] = useState({
     collumns: [
-      { title: 'Professor', field: 'teacher_id.name' },
+      { title: 'Admin', field: 'admin_id.email' },
       { title: 'Turma', field: 'class_id.course.name' },
       { title: 'Turno', field: 'class_id.shift' },
       { title: 'Ano', field: 'class_id.year' },
@@ -93,6 +93,4 @@ export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => 
       ]}
     />
   )
-}
-
-export default MinhasReservasTable;
+};

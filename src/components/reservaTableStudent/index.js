@@ -24,24 +24,46 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
 
     { title: 'Aluno', field: `id_student.name`, filtering: false },
     { title: 'Matrícula', field: 'id_student.code', filtering: false },
-    { title: 'Curso', field: 'id_student.course', filtering: false },
-    { title: 'Turma', field: 'id_student.class',filtering: false },
+    { title: 'Curso', field: 'id_student.id_class.course.name', filtering: false },
+    { title: 'Turma', field: 'id_student.id_class.shift',filtering: false },
     { title: 'Aprovado', field: 'approved',filtering: false },
     { title: 'Confirmação', field: `confirm`,filtering: false },
   ]);
   
-  const doneSelection = async (evnt, students) => {
-    console.log('onclick');
-    console.log(students);
-    const promisesList = students.map(async student => {
-      await api.put(`/students/can-required-meal/${student._id}`)
-    });
-
-    await Promise.all(promisesList).then(resp => {
-      console.log('cabou o put');
-      apiData();
+  const doneSelection = async (event, rowData) => {
+    console.log(rowData)
+    rowData.map(row => {
+      api.put(`/reservations/student/${row._id}`).then(data => {
+        console.log('ok')
+        window.location.href="/reserveStudent"
+      }).catch(error => {
+        console.log(error);
+      })
     });
   };
+
+  const disapproveSelection = async (event, rowData) => {
+    rowData.map(row => {
+      api.put(`/reservations/student/disapprove/${row._id}`).then(data => {
+        console.log('ok')
+        window.location.href="/reserveStudent"
+      }).catch(error => {
+        console.log(error);
+      })
+    });
+  }
+
+  const deleteSelection = async (event, rowData) => {
+    // /reservations/student/:id
+    console.log(rowData)
+    rowData.map(row => {
+      api.delete(`/reservations/student/${row._id}`).then(data => {
+        window.location.href="/reserveStudent"
+      }).catch(error => {
+        console.log(error);
+      })
+    });
+  }
 
   const rowAdd = async newData => {
     // try {
@@ -98,17 +120,31 @@ const StudentsTableReserve = ({ students, apiData, title }) => {
         localization={settingsText}
         columns={columns}
         data={students}
-        actions={[{ 
-          icon: 'done_all', 
-          tooltip: 'Feito',
-          backgroundColor: '#2AB083',
-          onClick: doneSelection,
-        }]}
-        editable={{
-          onRowAdd: newData =>null,
-          onRowUpdate: rowUpdate,
-          onRowDelete: rowDelete,
-        }}
+        actions={[
+          { 
+            icon: 'done', 
+            tooltip: 'Autorizar refeição',
+            backgroundColor: '#2AB083',
+            onClick: doneSelection,
+          },
+          { 
+            icon: 'cancel', 
+            tooltip: 'Desaprovar pedido',
+            backgroundColor: '#2AB083',
+            onClick: disapproveSelection,
+          },
+          { 
+            icon: 'delete', 
+            tooltip: 'Deletar pedido',
+            backgroundColor: '#2AB083',
+            onClick: deleteSelection,
+          }
+        ]}
+        // editable={{
+        //   onRowAdd: newData =>null,
+        //   onRowUpdate: rowUpdate,
+        //   onRowDelete: rowDelete,
+        // }}
         styles={{}}
         localization={settingsText}
         options={{

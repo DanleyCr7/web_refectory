@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MinhasReservasTable from '../../components/MinhasReservasTable';
+import {MinhasReservasTableAdmin} from '../../components/MinhasReservasTableAdmin';
 import api from '../../services/api';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -50,7 +50,8 @@ const Main = _ => {
 
   const apiData = async _ => {
     try {
-      const resp = await api.get(`/reservations/${user._id}`);
+      const resp = await api.get(`/admin/reservations/${user._id}`);
+      console.log(resp.data);
       setReservations(resp.data);
     } catch (err) {
       console.log(err);
@@ -72,12 +73,13 @@ const Main = _ => {
       }}
       />
       <>
-      <MinhasReservasTable 
+      <MinhasReservasTableAdmin 
         handlerDialog={handlerDialog} 
         title="Minhas Reservas" 
         data={reservations} 
         apiData={apiData} 
       />
+
       <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"

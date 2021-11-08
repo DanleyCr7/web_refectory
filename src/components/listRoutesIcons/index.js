@@ -95,7 +95,7 @@ export const RouteList = _ => {
             </>
           }
 
-          {user?.permission == 'professor' &&
+          {user?.permission === 'professor' &&
             <>
               <Link className={classes.list} to='/minhasReservas' color='inherit' underline='none' component={RouterLink}>
                 <ListItem >
@@ -108,15 +108,41 @@ export const RouteList = _ => {
             </>
           }
 
+          {user?.permission === 'admin' &&
+            <>
+              <Link className={classes.list} to='/admin/minhasReservas' color='inherit' underline='none' component={RouterLink}>
+                <ListItem >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Minhas Reservas' />
+                </ListItem>
+              </Link>
+            </>
+          }
+
           {/* Admin */}
-          <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
-            <ListItem>
-              <ListItemIcon>
-                <Person />
-              </ListItemIcon>
-              <ListItemText primary='Turmas' />
-            </ListItem>
-          </Link>
+          {user?.permission == 'professor' &&
+            <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
+              <ListItem>
+                <ListItemIcon>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText primary='Turmas' />
+              </ListItem>
+            </Link>
+          }
+
+          {user?.permission == 'admin' &&
+            <Link className={classes.list} to='/turmasAdmin' color='inherit' underline='none' component={RouterLink}>
+              <ListItem>
+                <ListItemIcon>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText primary='Turmas' />
+              </ListItem>
+            </Link>
+          }
 
           {/* Collapsible de reservas */}
           {user?.permission === 'admin' &&

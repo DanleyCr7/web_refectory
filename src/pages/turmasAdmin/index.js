@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
-
-import ReservaTableStudent from '../../components/reservaTableStudent';
 import CountMeal from '../../components/countMeal';
+import { ClassTableAdmin } from '../../components/ClassTableAdmin';
 import api from '../../services/api';
 
 const Main = _ => {
-  const [studentsReserve, setStudentsReserve] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
-  const apiData = async () => {
-    api.get('/reserves').then(resp => {
-      console.log(resp.data)
-      setStudentsReserve(resp.data)
-    }).catch(error => {
-      console.log(error)
-    })
-  }
+  const apiData = async _ => {
+    try {
+      const resp = await api.get('/class');
+      setClasses(resp.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     apiData();
   }, [])
+
 
   return (
     <>
@@ -27,14 +28,16 @@ const Main = _ => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
-          padding: '0 8px',
+          padding: '0px 0px',
           minHeight: '64px',
         }}
         />
-        <ReservaTableStudent
-          students={studentsReserve}
-          title='Reserva dos alunos'
+        <ClassTableAdmin
+          classes={classes}
+          apiData={apiData}
+          title='Turmas'
         />
+
       </main>
       <CountMeal />
     </>

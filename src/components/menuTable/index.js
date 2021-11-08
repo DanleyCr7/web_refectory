@@ -210,17 +210,15 @@ const MenuTable = _ => {
             selection: true,
             sorting: false,
             actionsColumnIndex: -1,
-            pageSize: 10,
+            pageSize: 5,
             headerStyle: {
               backgroundColor: '#2FA23B',
               color: '#eee',
               fontSize: '1em',
               zIndex: 8
             },
-
           }}
         />
-
       </ThemeProvider>
     </>
   );
