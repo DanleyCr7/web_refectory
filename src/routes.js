@@ -31,32 +31,32 @@ const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
 const Routes = _ => (
   <Switch>
-    <Route path='/refeitorio/' exact component={Auth} />
-    <Route path='/refeitorio/principal' component={Main} />
-    <Route path='/refeitorio/menu' component={Menu} />
-    <Route path='/refeitorio/checkin' component={Checkin} />
-    <Route path='/refeitorio/warning' component={Warning} />
-    <Route path='/refeitorio/lack' component={Lack} />
-    <Route path='/refeitorio/reserveStudent' component={ReservaTableStudent} />
-    <Route path='/refeitorio/registerProf' component={RegisterProf} />
-    <Route path='/refeitorio/StudentsRegister' component={StudentsRegister} />
-    <Route path='/refeitorio/RegisterCourser' component={RegisterCourser} />
-    <Route path='/refeitorio/RegisterClasses' component={RegisterClasses} />
-    <Route path='/refeitorio/RegisterStudent' component={RegisterStudent} />
-    <Route path='/refeitorio/Professores' component={Professores} />
-    <Route path='/refeitorio/Cursos' component={Cursos} />
-    <Route path='/refeitorio/Turmas' component={Turmas} />
+    <Route path='/' exact component={Auth} />
+    <Route path='/principal' component={Main} />
+    <Route path='/menu' component={Menu} />
+    <Route path='/checkin' component={Checkin} />
+    <Route path='/warning' component={Warning} />
+    <Route path='/lack' component={Lack} />
+    <Route path='/reserveStudent' component={ReservaTableStudent} />
+    <Route path='/registerProf' component={RegisterProf} />
+    <Route path='/StudentsRegister' component={StudentsRegister} />
+    <Route path='/RegisterCourser' component={RegisterCourser} />
+    <Route path='/RegisterClasses' component={RegisterClasses} />
+    <Route path='/RegisterStudent' component={RegisterStudent} />
+    <Route path='/Professores' component={Professores} />
+    <Route path='/Cursos' component={Cursos} />
+    <Route path='/Turmas' component={Turmas} />
 
-    <Route path='/refeitorio/students/edit/:id' component={StudentsEdit} />
-    <Route path='/refeitorio/courses/edit/:id' component={EditCursos} />
-    <Route path='/refeitorio/teachers/edit/:id' component={EditProfessores} />
-    <Route path='/refeitorio/class/edit/:id' component={EditTurmas} />
-    <Route path="/refeitorio/class/reservation/:id" component={ConfirmReservation} />
-    <Route path="/refeitorio/admin/class/reservation/:id" component={ConfirmReservationAdmin} />
-    <Route path="/refeitorio/minhasReservas" component={MinhasReservas} />
-    <Route path='/refeitorio/confirmStudentsReservations/:id_class/:id_reservation' component={ConfirmStudentsReservations} />
-    <Route path="/refeitorio/turmasAdmin" component={TurmasAdmin} />
-    <Route path="/refeitorio/admin/minhasReservas" component={MinhasReservasAdmin} />
+    <Route path='/students/edit/:id' component={StudentsEdit} />
+    <Route path='/courses/edit/:id' component={EditCursos} />
+    <Route path='/teachers/edit/:id' component={EditProfessores} />
+    <Route path='/class/edit/:id' component={EditTurmas} />
+    <Route path="/class/reservation/:id" component={ConfirmReservation} />
+    <Route path="/admin/class/reservation/:id" component={ConfirmReservationAdmin} />
+    <Route path="/minhasReservas" component={MinhasReservas} />
+    <Route path='/confirmStudentsReservations/:id_class/:id_reservation' component={ConfirmStudentsReservations} />
+    <Route path="/turmasAdmin" component={TurmasAdmin} />
+    <Route path="/admin/minhasReservas" component={MinhasReservasAdmin} />
   </Switch>
 );
 

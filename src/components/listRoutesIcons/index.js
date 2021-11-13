@@ -49,7 +49,7 @@ export const RouteList = _ => {
           {/* Admin */}
           {user?.permission === 'admin' &&
             <>
-              <Link className={classes.list} to='/refeitorio/principal' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/principal' color='inherit' underline='none' component={RouterLink}>
                 <ListItem >
                   <ListItemIcon>
                     <HomeIcon />
@@ -58,7 +58,7 @@ export const RouteList = _ => {
                 </ListItem>
               </Link>
 
-              <Link className={classes.list} to='/refeitorio/menu' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/menu' color='inherit' underline='none' component={RouterLink}>
                 <ListItem>
                   <ListItemIcon>
                     <LocalDiningIcon />
@@ -67,7 +67,7 @@ export const RouteList = _ => {
                 </ListItem>
               </Link>
 
-              <Link className={classes.list} to='/refeitorio/cursos' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/cursos' color='inherit' underline='none' component={RouterLink}>
                 <ListItem>
                   <ListItemIcon>
                     <Book />
@@ -76,7 +76,7 @@ export const RouteList = _ => {
                 </ListItem>
               </Link>
 
-              <Link className={classes.list} to='/refeitorio/Professores' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/Professores' color='inherit' underline='none' component={RouterLink}>
                 <ListItem>
                   <ListItemIcon>
                     <Person />
@@ -84,7 +84,7 @@ export const RouteList = _ => {
                   <ListItemText primary='Professores' />
                 </ListItem>
               </Link>
-              <Link className={classes.list} to='/refeitorio/lack' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/lack' color='inherit' underline='none' component={RouterLink}>
                 <ListItem>
                   <ListItemIcon>
                     <School />
@@ -97,7 +97,7 @@ export const RouteList = _ => {
 
           {user?.permission === 'professor' &&
             <>
-              <Link className={classes.list} to='/refeitorio/minhasReservas' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/minhasReservas' color='inherit' underline='none' component={RouterLink}>
                 <ListItem >
                   <ListItemIcon>
                     <HomeIcon />
@@ -110,7 +110,7 @@ export const RouteList = _ => {
 
           {user?.permission === 'admin' &&
             <>
-              <Link className={classes.list} to='/refeitorio/admin/minhasReservas' color='inherit' underline='none' component={RouterLink}>
+              <Link className={classes.list} to='/admin/minhasReservas' color='inherit' underline='none' component={RouterLink}>
                 <ListItem >
                   <ListItemIcon>
                     <HomeIcon />
@@ -123,7 +123,7 @@ export const RouteList = _ => {
 
           {/* Admin */}
           {user?.permission == 'professor' &&
-            <Link className={classes.list} to='/refeitorio/Turmas' color='inherit' underline='none' component={RouterLink}>
+            <Link className={classes.list} to='/Turmas' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
                 <ListItemIcon>
                   <Person />
@@ -134,7 +134,7 @@ export const RouteList = _ => {
           }
 
           {user?.permission == 'admin' &&
-            <Link className={classes.list} to='/refeitorio/turmasAdmin' color='inherit' underline='none' component={RouterLink}>
+            <Link className={classes.list} to='/turmasAdmin' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
                 <ListItemIcon>
                   <Person />
@@ -159,14 +159,14 @@ export const RouteList = _ => {
           <Collapsible open={collapsibleReserve}>
             {user?.permission === 'admin' &&
               <>
-                <Link className={classes.list} to='/refeitorio/warning' color='inherit' underline='none' component={RouterLink}>
+                <Link className={classes.list} to='/warning' color='inherit' underline='none' component={RouterLink}>
                   <ListItem>
                     <ListItemIcon>
                     </ListItemIcon>
                     <ListItemText primary='Professores' />
                   </ListItem>
                 </Link>
-                <Link className={classes.list} to='/refeitorio/reserveStudent' color='inherit' underline='none' component={RouterLink}>
+                <Link className={classes.list} to='/reserveStudent' color='inherit' underline='none' component={RouterLink}>
                   <ListItem>
                     <ListItemIcon>
                     </ListItemIcon>
@@ -190,28 +190,28 @@ export const RouteList = _ => {
             </Link>
           }
           <Collapsible open={collapsibleRegister}>
-            <Link className={classes.list} to='/refeitorio/registerProf' color='inherit' underline='none' component={RouterLink}>
+            <Link className={classes.list} to='/registerProf' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
                 <ListItemIcon>
                 </ListItemIcon>
                 <ListItemText primary='Registrar professor' />
               </ListItem>
             </Link>
-            <Link className={classes.list} to='/refeitorio/RegisterCourser' color='inherit' underline='none' component={RouterLink}>
+            <Link className={classes.list} to='/RegisterCourser' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
                 <ListItemIcon>
                 </ListItemIcon>
                 <ListItemText primary='Registrar curso' />
               </ListItem>
             </Link>
-            <Link className={classes.list} to='/refeitorio/RegisterClasses' color='inherit' underline='none' component={RouterLink}>
+            <Link className={classes.list} to='/RegisterClasses' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
                 <ListItemIcon>
                 </ListItemIcon>
                 <ListItemText primary='Registrar turma  ' />
               </ListItem>
             </Link>
-            <Link className={classes.list} to='/refeitorio/registerStudent' color='inherit' underline='none' component={RouterLink}>
+            <Link className={classes.list} to='/registerStudent' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
                 <ListItemIcon>
                 </ListItemIcon>
@@ -221,7 +221,7 @@ export const RouteList = _ => {
           </Collapsible>
         </>
         :
-        <Link className={classes.list} to='/refeitorio/' color='inherit' underline='none' component={RouterLink}>
+        <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
           <ListItem>
             <ListItemIcon>
               <LockOpen />
@@ -229,7 +229,7 @@ export const RouteList = _ => {
             <ListItemText primary='Acesso' />
           </ListItem>
         </Link>}
-      <Link className={classes.list} to='/refeitorio/checkin' color='inherit' underline='none' component={RouterLink}>
+      <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
             <Check />
