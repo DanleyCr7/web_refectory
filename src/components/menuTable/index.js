@@ -7,11 +7,15 @@ import settingsText from '../../config/settingsText';
 import Snackbar from '../snackbar';
 import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { date, month, year } from './date'
 
 const MenuTable = _ => {
-
+   const [helperText, setHelperText] = useState({
+    resp: '',
+    message: ''
+  });
   const theme = createTheme({
     palette: {
       primary: {
@@ -77,7 +81,8 @@ const MenuTable = _ => {
       console.log(data)
       setState({ ...state, data });
     } catch (err) {
-      console.log(err);
+      setOpen(true);
+      setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
     }
   };
 
@@ -96,7 +101,7 @@ const MenuTable = _ => {
       variant='filled'
     />
   );
-  const materialDateInput = `${year}-${month}-${date}`;
+  const materialDateInput = ``;
   const DateTextField = ({ props, label, onChange }) => (
     <TextField
       id="date"
@@ -133,13 +138,16 @@ const MenuTable = _ => {
     try {
       await api.post('/menu', newData)
         .then(resp => {
-          console.log(resp.data)
+          setOpen(true);
+          setHelperText({ message: 'Cardápio criado com sucesso', resp: 'success' });
           apiGetData()
         }).catch(error => {
-          console.log(error)
+          setOpen(true);
+          setHelperText({ message:  'Ops, já existe um cardápio para essa data', resp: 'error' });
         })
     } catch (err) {
-      console.log(err);
+        setOpen(true)
+        setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
     }
   };
 
@@ -159,7 +167,8 @@ const MenuTable = _ => {
           setState({ ...state, data });
         })
     } catch (err) {
-      console.log(err);
+        setOpen(true);
+        setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
     }
   };
 
@@ -183,7 +192,7 @@ const MenuTable = _ => {
 
   return (
     <>
-      <Snackbar open={open} setOpen={setOpen} variant={'warning'} msg={'Preencha todos os campos'} />
+      <Snackbar open={open} setOpen={setOpen} variant={helperText.resp} msg={helperText.message} />
       <ThemeProvider theme={theme}>
         <MaterialTable
           title='Cardápio Refeitório'
