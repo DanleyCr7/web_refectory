@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import api from '../services/api';
 import MaterialTable from 'material-table'
 import {useHistory} from 'react-router-dom';
-import settingsDefaultText from '../config/settingsText'
+import settingsDefaultText from '../config/settingsText';
 
 export const MinhasReservasTableAdmin = ({ handlerDialog, data, title, apiData }) => {
   const history = useHistory();
@@ -21,14 +21,17 @@ export const MinhasReservasTableAdmin = ({ handlerDialog, data, title, apiData }
   })
 
   const deleteReservation = async (event, rowData) => {
-    console.log(rowData);
-    api.delete(`/reservations/${rowData._id}`).then(() => {
-      apiData();
+    rowData.map(row => {
+      api.delete(`/admin/reservations/class/${row._id}`).then(() => {
+        apiData();
+      });
     })
   }
 
   const selectStudents = async (event, rowData) => {
-    history.push(`/confirmStudentsReservations/${rowData.class_id._id}/${rowData._id}`);
+    const class_id = rowData[0].class_id._id;
+    const reservation_id = rowData[0]._id;
+    history.push(`/confirmStudentsReservations/${class_id}/${reservation_id}`);
   }
 
   return (
@@ -50,6 +53,7 @@ export const MinhasReservasTableAdmin = ({ handlerDialog, data, title, apiData }
       ]}
       localization={settingsDefaultText}
       options={{
+        selection: true,
         sorting: false,
         pageSize: 5,
         actionsColumnIndex: -1,
@@ -72,20 +76,20 @@ export const MinhasReservasTableAdmin = ({ handlerDialog, data, title, apiData }
                   color: 'gray',
                 }}
               >
-              <table style={{ width: '100%', padding: '10px' }}>
-                <tr>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                </tr>
-                { rowData.students.map(student => (
-                  <tr key={student._id}>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
-                  <td>{student.phone}</td>
-                  </tr> 
-                ))}
-              </table>
+                <table style={{ width: '100%', padding: '10px' }}>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                  </tr>
+                  { rowData.students.map(student => (
+                    <tr key={student._id}>
+                      <td>{student.name}</td>
+                      <td>{student.email}</td>
+                      <td>{student.phone}</td>
+                    </tr> 
+                  ))}
+                </table>
               </div>
             )
           },
