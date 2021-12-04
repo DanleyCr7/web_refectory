@@ -100,8 +100,7 @@ const Check = (_) => {
         const data = await localStorage.getItem("ifpi@student");
 
         const student = JSON.parse(data);
-        if (student.name !== response.data.id_student.name) {
-          console.log(student.name);
+        if (student?.name !== response.data.id_student.name) {
           localStorage.setItem(
             "ifpi@student",
             JSON.stringify(response.data.id_student)
