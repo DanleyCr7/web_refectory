@@ -97,10 +97,19 @@ const Check = (_) => {
     setTimeout(async () => {
       try {
         const response = await api.get("/verificar_presenca");
-        const data = await localStorage.getItem("ifpi@student");
+        var data = await localStorage.getItem("ifpi@student");
+        var student = JSON.parse(data);
 
-        const student = JSON.parse(data);
-        if (student?.name !== response.data.id_student.name) {
+        if (!student) {
+          localStorage.setItem(
+            "ifpi@student",
+            JSON.stringify(response.data.id_student)
+          );
+          data = await localStorage.getItem("ifpi@student");
+          student = JSON.parse(data);
+        }
+
+        if (!student || student?.name !== response.data.id_student.name) {
           localStorage.setItem(
             "ifpi@student",
             JSON.stringify(response.data.id_student)
