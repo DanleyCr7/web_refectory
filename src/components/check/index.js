@@ -100,36 +100,36 @@ const Check = (_) => {
         var data = await localStorage.getItem("ifpi@student");
         var student = JSON.parse(data);
 
-        if (!student) {
-          localStorage.setItem(
-            "ifpi@student",
-            JSON.stringify(response.data.id_student)
-          );
-          data = await localStorage.getItem("ifpi@student");
-          student = JSON.parse(data);
-        }
-
-        if (!student || student?.name !== response.data.id_student.name) {
-          localStorage.setItem(
-            "ifpi@student",
-            JSON.stringify(response.data.id_student)
-          );
-          let name = response.data.id_student.name;
-          MySwal.fire({
-            title: (
-              <p>
-                {response.data.message} {name}
-              </p>
-            ),
-            footer: "Controle de refeições",
-            timer: 3000,
-            didOpen: () => {
-              // MySwal.clickConfirm();
-            },
-          });
-          setQrcode(false);
-        } else {
-          setQrcode(false);
+        if (response.data) {
+          if (!student) {
+            localStorage.setItem(
+              "ifpi@student",
+              JSON.stringify({ name: "", code: "" })
+            );
+            data = await localStorage.getItem("ifpi@student");
+            student = JSON.parse(data);
+          } else if (student?.name !== response.data.id_student.name) {
+            localStorage.setItem(
+              "ifpi@student",
+              JSON.stringify(response.data.id_student)
+            );
+            let name = response.data.id_student.name;
+            MySwal.fire({
+              title: (
+                <p>
+                  {response.data.message} {name}
+                </p>
+              ),
+              footer: "Controle de refeições",
+              timer: 3000,
+              didOpen: () => {
+                // MySwal.clickConfirm();
+              },
+            });
+            setQrcode(false);
+          } else {
+            setQrcode(false);
+          }
         }
       } catch (error) {
         console.log(error);
