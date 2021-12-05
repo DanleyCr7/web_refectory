@@ -99,9 +99,8 @@ const Check = (_) => {
         const response = await api.get("/verificar_presenca");
         var data = await localStorage.getItem("ifpi@student");
         var student = JSON.parse(data);
-
         if (response.data) {
-          if (!student) {
+          if (!student && response.data.index === 1) {
             localStorage.setItem(
               "ifpi@student",
               JSON.stringify({ name: "", code: "" })
