@@ -97,26 +97,10 @@ const Check = (_) => {
     setTimeout(async () => {
       try {
         const response = await api.get("/verificar_presenca");
-        var data = await localStorage.getItem("ifpi@student");
-        var student = JSON.parse(data);
         if (response.data) {
-          if (!student) {
-            localStorage.setItem(
-              "ifpi@student",
-              JSON.stringify(
-                response.data.index === 1
-                  ? { name: "", code: "" }
-                  : response.data.id_student
-              )
-            );
-            data = await localStorage.getItem("ifpi@student");
-            student = JSON.parse(data);
-          } else if (student?.name !== response.data.id_student.name) {
-            localStorage.setItem(
-              "ifpi@student",
-              JSON.stringify(response.data.id_student)
-            );
-            let name = response.data.id_student.name;
+          const student = response.data.id_student;
+          if (!response.data.ready) {
+            let name = student.name;
             MySwal.fire({
               title: (
                 <p>
@@ -129,9 +113,9 @@ const Check = (_) => {
                 // MySwal.clickConfirm();
               },
             });
-            setQrcode(false);
-          } else {
-            setQrcode(false);
+            await api.put("verificar/update", {
+              id_student: student._id,
+            });
           }
         }
       } catch (error) {
