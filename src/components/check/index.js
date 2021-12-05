@@ -100,10 +100,14 @@ const Check = (_) => {
         var data = await localStorage.getItem("ifpi@student");
         var student = JSON.parse(data);
         if (response.data) {
-          if (!student && response.data.index === 1) {
+          if (!student) {
             localStorage.setItem(
               "ifpi@student",
-              JSON.stringify({ name: "", code: "" })
+              JSON.stringify(
+                response.data.index === 1
+                  ? { name: "", code: "" }
+                  : response.data.id_student
+              )
             );
             data = await localStorage.getItem("ifpi@student");
             student = JSON.parse(data);
