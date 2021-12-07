@@ -12,7 +12,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { date, month, year } from './date'
 
 const MenuTable = _ => {
-   const [helperText, setHelperText] = useState({
+  const [helperText, setHelperText] = useState({
     resp: '',
     message: ''
   });
@@ -53,6 +53,30 @@ const MenuTable = _ => {
         validate: rowData => Boolean(rowData.description),
       },
       {
+        title: 'hora da Reserva', field: 'hourReserve',
+        editComponent: props => (
+          <TimeTextField
+            props={props}
+            label='hourReserve'
+            field='time'
+            onChange={handlehourReserve}
+          />
+        ),
+        validate: rowData => Boolean(rowData.hourReserve),
+      },
+
+      {
+        title: 'hora da confirmação', field: 'hourConfirmReserve',
+        editComponent: props => (
+          <TimeTextField
+            props={props}
+            label='hourConfirmReserve'
+            onChange={handlehourConfirmReserve}
+          />
+        ),
+        validate: rowData => Boolean(rowData.hourConfirmReserve),
+      },
+      {
         title: 'Dia da Semana',
         field: 'date',
         editComponent: props => (
@@ -68,7 +92,6 @@ const MenuTable = _ => {
         field: 'type',
         lookup: { 0: 'Almoço', 1: 'Jantar' },
         validate: rowData => Boolean(rowData.type),
-
       },
     ],
     data: []
@@ -101,12 +124,28 @@ const MenuTable = _ => {
       variant='filled'
     />
   );
+
   const materialDateInput = ``;
+
   const DateTextField = ({ props, label, onChange }) => (
     <TextField
       id="date"
       label={label}
       type="date"
+      defaultValue={materialDateInput} // Todate's Date being used as default
+      InputLabelProps={{
+        shrink: true,
+        required: true
+      }}
+      onChange={onChange(props)}
+    />
+  );
+
+  const TimeTextField = ({ props, label, onChange }) => (
+    <TextField
+      id="time"
+      label={label}
+      type="time"
       defaultValue={materialDateInput} // Todate's Date being used as default
       InputLabelProps={{
         shrink: true,
@@ -122,11 +161,24 @@ const MenuTable = _ => {
     props.onRowDataChange(data);
   };
 
+  const handlehourReserve = props => event => {
+    const data = { ...props.rowData };
+    data.hourReserve = event.target.value;
+    props.onRowDataChange(data);
+  };
+
+  const handlehourConfirmReserve = props => event => {
+    const data = { ...props.rowData };
+    data.hourConfirmReserve = event.target.value;
+    props.onRowDataChange(data);
+  };
+
   const handleDescrip = props => event => {
     const data = { ...props.rowData };
     data.description = event.target.value;
     props.onRowDataChange(data);
   };
+
   const handleDate = props => event => {
     const data = { ...props.rowData };
     const formatDate = format(addDays(new Date(event.target.value), 1), 'dd/MM/yyyy')
@@ -143,11 +195,11 @@ const MenuTable = _ => {
           apiGetData()
         }).catch(error => {
           setOpen(true);
-          setHelperText({ message:  'Ops, já existe um cardápio para essa data', resp: 'error' });
+          setHelperText({ message: 'Ops, já existe um cardápio para essa data', resp: 'error' });
         })
     } catch (err) {
-        setOpen(true)
-        setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
+      setOpen(true)
+      setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
     }
   };
 
@@ -160,6 +212,8 @@ const MenuTable = _ => {
         description: newData.description,
         date: newData.date,
         type: newData.type,
+        hourConfirmReserve: newData.hourConfirmReserve,
+        hourReserve: newData.hourReserve,
       })
         .then(resp => {
           const data = [...state.data];
@@ -167,8 +221,8 @@ const MenuTable = _ => {
           setState({ ...state, data });
         })
     } catch (err) {
-        setOpen(true);
-        setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
+      setOpen(true);
+      setHelperText({ message: 'Ops, houve algum erro :(', resp: 'error' });
     }
   };
 
