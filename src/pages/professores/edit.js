@@ -84,8 +84,9 @@ export default function Update() {
         <Grid xs={12} sm={6}>
           <TextField
             name="name"
-            label="Nome do aluno"
+            label="Nome do professor"
             value={name}
+            required
             onChange={(e) => setName(e.target.value)}
             className={classes.textField}
           />
@@ -96,6 +97,7 @@ export default function Update() {
             name="email"
             label="email"
             value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
             className={classes.textField}
           />
@@ -106,6 +108,7 @@ export default function Update() {
             id="cpf"
             name="cpf"
             label="CPF"
+            required
             value={cpf}
             onChange={(e) => setCpf(e.target.value)}
             className={classes.textField}
@@ -118,6 +121,7 @@ export default function Update() {
             name="phone"
             label="phone"
             value={phone}
+            required
             onChange={(e) => setPhone(e.target.value)}
             className={classes.textField}
           />
@@ -129,6 +133,7 @@ export default function Update() {
             name="rg"
             label="rg"
             value={rg}
+            required
             onChange={(e) => setRg(e.target.value)}
             className={classes.textField}
           />
@@ -140,6 +145,7 @@ export default function Update() {
             name="password"
             label="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
             className={classes.textField}
           />
@@ -151,6 +157,7 @@ export default function Update() {
             name="city"
             label="city"
             value={city}
+            required
             onChange={(e) => setCity(e.target.value)}
             className={classes.textField}
           />
@@ -161,6 +168,7 @@ export default function Update() {
             id="state"
             name="state"
             label="state"
+            required
             value={state}
             onChange={(e) => setState(e.target.value)}
             className={classes.textField}

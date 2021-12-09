@@ -6,61 +6,62 @@ import Button from '@material-ui/core/Button';
 import { colors, makeStyles } from '@material-ui/core';
 import api from '../../services/api';
 const useStyles = makeStyles({
-    button:{
-       backgroundColor: '#17871d',
-       color: '#fff',
-      marginTop: 15,
+  button: {
+    backgroundColor: '#17871d',
+    color: '#fff',
+    marginTop: 15,
 
-    },
-    margin:{
-        marginTop: 80,
-        paddingLeft: 15
-    },
-   
-    textField:{
-      width: '90%',
+  },
+  margin: {
+    marginTop: 80,
+    paddingLeft: 15
+  },
 
-    },
+  textField: {
+    width: '90%',
+
+  },
 });
 export default function Register() {
   const classes = useStyles();
-  
-  const register = async (event)=>{
+
+  const register = async (event) => {
     event.preventDefault()
     let data = event.target;
-    
+
     console.log({
-        name: data?.name?.value,
+      name: data?.name?.value,
     })
-    await api.post('/courses',{
-        name: data?.name?.value,
-    }).then(resp=>{
-        alert('Curso cadastrado com sucesso');
-            window.location.reload();
-    }).catch(error=>{
-         alert('Ops, aconteceu algum erro no cadastro!');
+    await api.post('/courses', {
+      name: data?.name?.value,
+    }).then(resp => {
+      alert('Curso cadastrado com sucesso');
+      window.location.reload();
+    }).catch(error => {
+      alert('Ops, aconteceu algum erro no cadastro!');
     })
-}
+  }
   return (
-    
+
     <form onSubmit={register}>
-    <Grid className={classes.margin} xs={12} container>
-     <Grid  xs={12} sm={12}>
-      <Typography variant="h6">
-        Cadastrar curso
-      </Typography>
-      </Grid>
-       <Grid  xs={12} sm={6}>
+      <Grid className={classes.margin} xs={12} container>
+        <Grid xs={12} sm={12}>
+          <Typography variant="h6">
+            Cadastrar curso
+          </Typography>
+        </Grid>
+        <Grid xs={12} sm={6}>
           <TextField
             name="name"
             label="Curso"
             className={classes.textField}
+            required
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-            <Button type="submit" className={classes.button} >Cadastrar curso</Button>
-        </Grid> 
+          <Button type="submit" className={classes.button} >Cadastrar curso</Button>
+        </Grid>
       </Grid>
-      </form>
+    </form>
   );
 }

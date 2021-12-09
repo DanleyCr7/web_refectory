@@ -66,7 +66,7 @@ export default function Update() {
         <Grid xs={12} sm={6}>
           <TextField
             name="name"
-            label="Nome do aluno"
+            label="Nome do curso"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={classes.textField}

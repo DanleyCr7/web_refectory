@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {MinhasReservasTableAdmin} from '../../components/MinhasReservasTableAdmin';
+import { MinhasReservasTableAdmin } from '../../components/MinhasReservasTableAdmin';
 import api from '../../services/api';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -26,12 +26,24 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  buttonCancel:{
-      position: 'absolute',
-      right: 15,
-      top: 10,
+  buttonCancel: {
+    position: 'absolute',
+    right: 15,
+    top: 10,
   }
 }));
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2AB083',
+    },
+    secondary: {
+      main: '#333',
+    },
+  },
+});
 
 const Main = _ => {
   const classes = useStyles();
@@ -39,7 +51,7 @@ const Main = _ => {
   const [reservations, setReservations] = useState([]);
   const [studentsNot, setStudentsNot] = useState(['', '']);
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
-  
+
   const handlerDialog = async (event, reserve) => {
     if (!open) {
       const response = await api.get(`reservationDetail/${reserve._id}`);
@@ -63,57 +75,59 @@ const Main = _ => {
   }, [])
 
   return (
-    <main style={{ flexGrow: 1, padding: '15px' }}>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-        minHeight: '64px',
-      }}
-      />
-      <>
-      <MinhasReservasTableAdmin 
-        handlerDialog={handlerDialog} 
-        title="Minhas Reservas" 
-        data={reservations} 
-        apiData={apiData} 
-      />
+    <ThemeProvider theme={theme}>
+      <main style={{ flexGrow: 1, padding: '15px' }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          padding: '0 8px',
+          minHeight: '64px',
+        }}
+        />
+        <>
+          <MinhasReservasTableAdmin
+            handlerDialog={handlerDialog}
+            title="Minhas Reservas"
+            data={reservations}
+            apiData={apiData}
+          />
 
-      <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={open}
-          onClose={handlerDialog}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <div className={classes.paper}>
-             <IconButton onClick={handlerDialog} className={classes.buttonCancel}>
-                <CancelIcon/>
-             </IconButton>
-              <h3 id="transition-modal-title">Não irão comparecer</h3>
-              {
-                studentsNot.length > 0 ?
-                studentsNot.map(student => {
-                  return (
-                    <div>
-                      <Typography>{student.name}</Typography>
-                    </div>
-                  )
-                }) :
-                <Typography>Todos os alunos se compreteram em comparecer.</Typography>
-             }
-            </div>
-          </Fade>
-        </Modal>
-      </>
-    </main>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handlerDialog}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <IconButton onClick={handlerDialog} className={classes.buttonCancel}>
+                  <CancelIcon />
+                </IconButton>
+                <h3 id="transition-modal-title">Não irão comparecer</h3>
+                {
+                  studentsNot.length > 0 ?
+                    studentsNot.map(student => {
+                      return (
+                        <div>
+                          <Typography>{student.name}</Typography>
+                        </div>
+                      )
+                    }) :
+                    <Typography>Todos os alunos se compreteram em comparecer.</Typography>
+                }
+              </div>
+            </Fade>
+          </Modal>
+        </>
+      </main>
+    </ThemeProvider>
   );
 };
 

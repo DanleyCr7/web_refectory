@@ -189,6 +189,7 @@ export const RouteList = _ => {
               </ListItem>
             </Link>
           }
+
           <Collapsible open={collapsibleRegister}>
             <Link className={classes.list} to='/registerProf' color='inherit' underline='none' component={RouterLink}>
               <ListItem>
@@ -218,7 +219,17 @@ export const RouteList = _ => {
                 <ListItemText primary='Registrar aluno' />
               </ListItem>
             </Link>
+
           </Collapsible>
+
+          <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
+            <ListItem>
+              <ListItemIcon>
+                <Check />
+              </ListItemIcon>
+              <ListItemText primary='Entrar no Refeitório' />
+            </ListItem>
+          </Link>
         </>
         :
         <Link className={classes.list} to='/' color='inherit' underline='none' component={RouterLink}>
@@ -229,14 +240,15 @@ export const RouteList = _ => {
             <ListItemText primary='Acesso' />
           </ListItem>
         </Link>}
-      <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
+
+      {/* <Link className={classes.list} to='/checkin' color='inherit' underline='none' component={RouterLink}>
         <ListItem>
           <ListItemIcon>
             <Check />
           </ListItemIcon>
           <ListItemText primary='Entrar no Refeitório' />
         </ListItem>
-      </Link>
+      </Link> */}
     </List>
   )
 }

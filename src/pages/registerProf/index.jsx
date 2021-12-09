@@ -61,7 +61,8 @@ export default function Register() {
       alert('Professor cadastrado com sucesso');
       window.location.reload();
     }).catch(error => {
-      alert('Ops, aconteceu algum erro no cadastro!');
+      console.log(error);
+      alert('ops, ocorreu um erro! verifique os campos ou entre em contato');
     })
   }
   return (
@@ -77,6 +78,7 @@ export default function Register() {
           <TextField
             name="name"
             label="Nome do professor"
+            required
             className={classes.textField}
           />
         </Grid>
@@ -84,6 +86,7 @@ export default function Register() {
           <TextField
             name="email"
             label="email"
+            required
             className={classes.textField}
           />
         </Grid>
@@ -92,6 +95,7 @@ export default function Register() {
           <TextField
             name="password"
             label="Senha"
+            required
             className={classes.textField}
           />
         </Grid>
@@ -99,6 +103,7 @@ export default function Register() {
           <TextField
             id="cpf"
             name="cpf"
+            required
             label="CPF"
             className={classes.textField}
 
@@ -109,6 +114,7 @@ export default function Register() {
             id="zip"
             name="rg"
             label="RG"
+            required
             className={classes.textField}
 
           />
@@ -117,6 +123,7 @@ export default function Register() {
           <TextField
             id="phone"
             name="phone"
+            required
             label="phone"
             className={classes.textField}
 
@@ -127,6 +134,7 @@ export default function Register() {
             id="Cidade"
             name="city"
             label="Cidade"
+            required
             className={classes.textField}
 
           />
@@ -135,6 +143,7 @@ export default function Register() {
           <TextField
             id="Estado"
             name="state"
+            required
             label="Estado"
             className={classes.textField}
           />
