@@ -7,6 +7,16 @@ import { createTheme } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 export const StudentsTable = ({ students, apiData, title }) => {
+  const newStudents = students.map(s => {
+    if (s.bloqued === true) {
+      return { ...s, bloqueado: 'sim' }
+    } else {
+      return { ...s, bloqueado: 'não' }
+    }
+  });
+
+  console.log(newStudents);
+
   const history = useHistory();
 
   const theme = createTheme({
@@ -30,15 +40,31 @@ export const StudentsTable = ({ students, apiData, title }) => {
   }
 
   const removeAuthStudents = async (event, rowData) => {
-   return rowData.map(row => {
+    return rowData.map(row => {
       api.put(`/students/permission/no/${row._id}`).then(() => {
         apiData();
       })
     });
   }
 
+  const unlockStudents = async (event, rowData) => {
+    return rowData.map(row => {
+      api.post(`/unlock_student`, { id_student: row._id }).then(() => {
+        apiData();
+      })
+    });
+  }
+
+  const lockStudents = async (event, rowData) => {
+    return rowData.map(row => {
+      api.post(`/lock_student`, { id_student: row._id }).then(() => {
+        apiData();
+      })
+    });
+  }
+
   const authStudents = async (event, rowData) => {
-   return rowData.map(row => {
+    return rowData.map(row => {
       api.put(`/students/permission/yes/${row._id}`).then(() => {
         apiData();
       })
@@ -63,8 +89,9 @@ export const StudentsTable = ({ students, apiData, title }) => {
           { title: 'Curso', field: 'id_class.course.name', filtering: false },
           { title: 'Turma', field: 'id_class.shift', filtering: false },
           { title: 'Permisão', field: 'permission', filtering: false },
+          { title: 'Bloqueado?', field: 'bloqueado', filtering: false }
         ]}
-        data={students}
+        data={newStudents}
         actions={[
           {
             icon: 'done',
@@ -75,6 +102,16 @@ export const StudentsTable = ({ students, apiData, title }) => {
             icon: 'warning',
             tooltip: 'Remover autorização',
             onClick: removeAuthStudents,
+          },
+          {
+            icon: 'lock',
+            tooltip: 'desbloquer aluno',
+            onClick: unlockStudents,
+          },
+          {
+            icon: 'block',
+            tooltip: 'bloquer aluno',
+            onClick: lockStudents,
           },
           {
             icon: 'delete',
