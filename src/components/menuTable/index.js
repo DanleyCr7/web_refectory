@@ -206,14 +206,14 @@ const MenuTable = (_) => {
         .catch((error) => {
           setOpen(true);
           setHelperText({
-            message: "Ops, já existe um cardápio para essa data",
+            message: `Ops, ${error.response.data.message} :(`,
             resp: "error",
           });
         });
     } catch (err) {
       setOpen(true);
       setHelperText({
-        message: `Ops, ${err.response.data.message} :(`,
+        message: `Ops, aconteceu algum. :(`,
         resp: "error",
       });
     }
