@@ -68,6 +68,7 @@ export default function SignIn() {
   const [circular, setCircular] = useState(false);
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState("professor");
+
   const users = [
     {
       descricao: "Professor",
@@ -75,6 +76,10 @@ export default function SignIn() {
     },
     {
       descricao: "Admin",
+      value: "admin",
+    },
+    {
+      descricao: "Nutricionista",
       value: "admin",
     },
   ];
@@ -89,18 +94,16 @@ export default function SignIn() {
       email: values.email.value,
       password: values.password.value,
     };
-
     api
       .post(`/auth/${select}`, data)
       .then(async (resp) => {
         const { data } = resp;
         setCircular(false);
+        setOpen(true);
         setHelperText({
           message: "Usuário logado com sucesso",
           resp: "success",
         });
-        setOpen(true);
-        setCircular(false);
         await localStorage.setItem("@ifpi/user", JSON.stringify(data));
         history.push(data.permission === "admin" ? "Main" : "Turmas");
         history.go();

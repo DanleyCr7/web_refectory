@@ -47,97 +47,98 @@ export const RouteList = (_) => {
       {user ? (
         <>
           {/* Admin */}
-          {user?.permission === "admin" && (
-            <>
-              <Link
-                className={classes.list}
-                to="/principal"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Principal" />
-                </ListItem>
-              </Link>
+          {user?.permission === "admin" ||
+            (user?.permission === "nutri" && (
+              <>
+                <Link
+                  className={classes.list}
+                  to="/principal"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Principal" />
+                  </ListItem>
+                </Link>
 
-              <Link
-                className={classes.list}
-                to="/menu"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <LocalDiningIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Cardápio" />
-                </ListItem>
-              </Link>
+                <Link
+                  className={classes.list}
+                  to="/menu"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <LocalDiningIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Cardápio" />
+                  </ListItem>
+                </Link>
 
-              <Link
-                className={classes.list}
-                to="/cursos"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <Book />
-                  </ListItemIcon>
-                  <ListItemText primary="Cursos" />
-                </ListItem>
-              </Link>
-              <Link
-                className={classes.list}
-                to="/nutricionistas"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <Person />
-                  </ListItemIcon>
-                  <ListItemText primary="Nutricionistas" />
-                </ListItem>
-              </Link>
+                <Link
+                  className={classes.list}
+                  to="/cursos"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <Book />
+                    </ListItemIcon>
+                    <ListItemText primary="Cursos" />
+                  </ListItem>
+                </Link>
+                <Link
+                  className={classes.list}
+                  to="/nutricionistas"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <Person />
+                    </ListItemIcon>
+                    <ListItemText primary="Nutricionistas" />
+                  </ListItem>
+                </Link>
 
-              <Link
-                className={classes.list}
-                to="/Professores"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <Person />
-                  </ListItemIcon>
-                  <ListItemText primary="Professores" />
-                </ListItem>
-              </Link>
-              <Link
-                className={classes.list}
-                to="/lack"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <School />
-                  </ListItemIcon>
-                  <ListItemText primary="Faltas" />
-                </ListItem>
-              </Link>
-            </>
-          )}
+                <Link
+                  className={classes.list}
+                  to="/Professores"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <Person />
+                    </ListItemIcon>
+                    <ListItemText primary="Professores" />
+                  </ListItem>
+                </Link>
+                <Link
+                  className={classes.list}
+                  to="/lack"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <School />
+                    </ListItemIcon>
+                    <ListItemText primary="Faltas" />
+                  </ListItem>
+                </Link>
+              </>
+            ))}
 
           {user?.permission === "professor" && (
             <>
@@ -158,24 +159,25 @@ export const RouteList = (_) => {
             </>
           )}
 
-          {user?.permission === "admin" && (
-            <>
-              <Link
-                className={classes.list}
-                to="/admin/minhasReservas"
-                color="inherit"
-                underline="none"
-                component={RouterLink}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Minhas Reservas" />
-                </ListItem>
-              </Link>
-            </>
-          )}
+          {user?.permission === "admin" ||
+            (user?.permission === "nutri" && (
+              <>
+                <Link
+                  className={classes.list}
+                  to="/admin/minhasReservas"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Minhas Reservas" />
+                  </ListItem>
+                </Link>
+              </>
+            ))}
 
           {/* Admin */}
           {user?.permission == "professor" && (
@@ -213,77 +215,80 @@ export const RouteList = (_) => {
           )}
 
           {/* Collapsible de reservas */}
-          {user?.permission === "admin" && (
-            <Link
-              style={{ textDecoration: "none" }}
-              className={classes.collapsible}
-              onClick={() => setcollapsibleReserve(!collapsibleReserve)}
-            >
-              <ListItem>
-                <ListItemIcon>
-                  {collapsibleReserve ? (
-                    <KeyboardArrowUp />
-                  ) : (
-                    <KeyboardArrowDown />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary="Reservas" />
-              </ListItem>
-            </Link>
-          )}
+          {user?.permission === "admin" ||
+            (user?.permission === "nutri" && (
+              <Link
+                style={{ textDecoration: "none" }}
+                className={classes.collapsible}
+                onClick={() => setcollapsibleReserve(!collapsibleReserve)}
+              >
+                <ListItem>
+                  <ListItemIcon>
+                    {collapsibleReserve ? (
+                      <KeyboardArrowUp />
+                    ) : (
+                      <KeyboardArrowDown />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary="Reservas" />
+                </ListItem>
+              </Link>
+            ))}
 
           <Collapsible open={collapsibleReserve}>
-            {user?.permission === "admin" && (
-              <>
-                <Link
-                  className={classes.list}
-                  to="/warning"
-                  color="inherit"
-                  underline="none"
-                  component={RouterLink}
-                >
-                  <ListItem>
-                    <ListItemIcon></ListItemIcon>
-                    <ListItemText primary="Professores" />
-                  </ListItem>
-                </Link>
-                <Link
-                  className={classes.list}
-                  to="/reserveStudent"
-                  color="inherit"
-                  underline="none"
-                  component={RouterLink}
-                >
-                  <ListItem>
-                    <ListItemIcon></ListItemIcon>
-                    <ListItemText primary="Alunos" />
-                  </ListItem>
-                </Link>
-              </>
-            )}
+            {user?.permission === "admin" ||
+              (user?.permission === "nutri" && (
+                <>
+                  <Link
+                    className={classes.list}
+                    to="/warning"
+                    color="inherit"
+                    underline="none"
+                    component={RouterLink}
+                  >
+                    <ListItem>
+                      <ListItemIcon></ListItemIcon>
+                      <ListItemText primary="Professores" />
+                    </ListItem>
+                  </Link>
+                  <Link
+                    className={classes.list}
+                    to="/reserveStudent"
+                    color="inherit"
+                    underline="none"
+                    component={RouterLink}
+                  >
+                    <ListItem>
+                      <ListItemIcon></ListItemIcon>
+                      <ListItemText primary="Alunos" />
+                    </ListItem>
+                  </Link>
+                </>
+              ))}
           </Collapsible>
 
           {/* Collapsible de reservas */}
 
           {/* Collapsible de cadastros */}
-          {user?.permission === "admin" && (
-            <Link
-              style={{ textDecoration: "none" }}
-              className={classes.collapsible}
-              onClick={() => setcollapsibleRegister(!collapsibleRegister)}
-            >
-              <ListItem>
-                <ListItemIcon>
-                  {collapsibleRegister ? (
-                    <KeyboardArrowUp />
-                  ) : (
-                    <KeyboardArrowDown />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary="Cadastros" />
-              </ListItem>
-            </Link>
-          )}
+          {user?.permission === "admin" ||
+            (user?.permission === "nutri" && (
+              <Link
+                style={{ textDecoration: "none" }}
+                className={classes.collapsible}
+                onClick={() => setcollapsibleRegister(!collapsibleRegister)}
+              >
+                <ListItem>
+                  <ListItemIcon>
+                    {collapsibleRegister ? (
+                      <KeyboardArrowUp />
+                    ) : (
+                      <KeyboardArrowDown />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary="Cadastros" />
+                </ListItem>
+              </Link>
+            ))}
 
           <Collapsible open={collapsibleRegister}>
             <Link
