@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { MDBDataTable } from 'mdbreact';
+import { makeStyles } from '@material-ui/core/styles';
 import { FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import Search from "@material-ui/icons/Search";
-
-import DatePickerFilter from '../../components/date'
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+}));
 
 const DatatablePage = () => {
   const [meal, setMeal] = useState('');
+  const classes = useStyles();
   const data = {
     columns: [
       {
@@ -16,7 +27,7 @@ const DatatablePage = () => {
         width: 150
       },
       {
-        label: 'Falta',
+        label: 'Refeição',
         field: 'position',
         sort: 'asc',
         width: 270
@@ -30,6 +41,12 @@ const DatatablePage = () => {
       {
         label: 'Quant. faltas',
         field: 'age',
+        sort: 'asc',
+        width: 100
+      },
+      {
+        label: 'Data',
+        field: 'date',
         sort: 'asc',
         width: 100
       },
@@ -54,7 +71,7 @@ const DatatablePage = () => {
         position: 'System Architect',
         office: 'Edinburgh',
         date: '02/01/2022',
-        qnt: 1,
+        age: '61',
         }
     ]
     };
@@ -75,8 +92,26 @@ const DatatablePage = () => {
         }}
             />
     <div className='col-12 d-flex justify-content-end m-0 pd-0' >
-        <DatePickerFilter label="Inico"/>
-        <DatePickerFilter label="Final"/>
+        <TextField
+        id="date"
+        label="Inicio"
+        type="date"
+        defaultValue="2017-05-24"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+        <TextField
+        id="date"
+        label="Final"
+        type="date"
+        defaultValue="2017-05-24"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
         <div className='col-2'>
         <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Refeição</InputLabel>
