@@ -11,7 +11,8 @@ import Logo from "../../images/logo.png";
 import api from "../../services/api";
 import Snackbar from "../../components/snackbar";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory } from 'history';
+
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 
 function Copyright() {
@@ -58,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+function SignIn() {
+  const history = createBrowserHistory();
   const classes = useStyles();
-  const history = useHistory();
   const [helperText, setHelperText] = useState({
     resp: "",
     message: "",
@@ -197,3 +198,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+export default SignIn;

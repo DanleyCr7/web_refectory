@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import MaterialTable from "material-table";
 import { ThemeProvider } from "@material-ui/styles";
 import api from "../../services/api";
-import { createTheme } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
 import Snackbar from "../../components/snackbar";
 
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 
 export const NutriTable = ({ nutricionistas, apiData, title }) => {
-  const history = useHistory();
+  const history = createBrowserHistory();
   const [helperText, setHelperText] = useState({
     resp: "",
     message: "",
   });
   const [open, setOpen] = useState(false);
-  const theme = createTheme({
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: "#2AB083",

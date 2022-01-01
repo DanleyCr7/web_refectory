@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import api from '../services/api';
 import MaterialTable from 'material-table'
-import {useHistory} from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import settingsDefaultText from '../config/settingsText'
 
 export const MinhasReservasTable = ({ handlerDialog, data, title, apiData }) => {
-  const history = useHistory();
+  const history = createBrowserHistory();
 
   console.log(data)
 

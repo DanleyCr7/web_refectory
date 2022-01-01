@@ -2,14 +2,13 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
 import api from '../services/api';
-import { createTheme } from '@material-ui/core';
-
-import { useHistory } from 'react-router-dom';
+import { createMuiTheme } from '@material-ui/core';
+import { createBrowserHistory } from 'history';
 
 export const ClassReservationTable = ({ reservations, apiData, title }) => {
-  const history = useHistory();
-
-  const theme = createTheme({
+  const history = createBrowserHistory();
+  
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: '#2AB083',
@@ -19,7 +18,7 @@ export const ClassReservationTable = ({ reservations, apiData, title }) => {
       },
     },
   });
-
+  
   return (
     <ThemeProvider theme={theme}>
       <MaterialTable

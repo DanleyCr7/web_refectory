@@ -3,7 +3,6 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 import Routes from './routes';
 import NavDrawer from './components/navDrawer';
 import ModalBox from './components/modalSendBox';
-import { useHistory } from 'react-router-dom';
 
 const App = _ => {
   const [modalSend, setModalSend] = useState(false)

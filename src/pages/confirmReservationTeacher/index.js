@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core';
 import api from '../../services/api';
 import { useParams } from 'react-router';
-import { useHistory } from 'react-router';
+import { createBrowserHistory } from 'history';
 
 const useStyles = makeStyles({
   button: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     color: '#fff',
     marginTop: 15,
   },
-
+  
   buttonBack: {
     backgroundColor: '#ccc',
     color: 'black',
@@ -27,24 +27,24 @@ const useStyles = makeStyles({
     marginTop: 80,
     paddingLeft: 15
   },
-
+  
   textField: {
     width: '90%',
   },
 });
 
 export default function Confirm() {
-  const history = useHistory();
+  const history = createBrowserHistory();
   const [data, setData] = useState("");
   const { id } = useParams();
   const classes = useStyles();
-
+  
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
-
+  
   const back = () => {
     history.push('/Turmas');
   }
-
+  
   const register = async (event) => {
     event.preventDefault()
     const class_id = id;

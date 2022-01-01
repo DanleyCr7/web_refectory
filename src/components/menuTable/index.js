@@ -5,7 +5,7 @@ import { format, addDays } from "date-fns";
 import api from "../../services/api";
 import settingsText from "../../config/settingsText";
 import Snackbar from "../snackbar";
-import { createTheme } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -17,7 +17,7 @@ const MenuTable = (_) => {
     message: "",
   });
 
-  const theme = createTheme({
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: "#2AB083",

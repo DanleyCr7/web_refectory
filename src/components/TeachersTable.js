@@ -2,14 +2,14 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
 import api from '../services/api';
-import { createTheme } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core';
 
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 export const TeachersTable = ({ teachers, apiData, title }) => {
-  const history = useHistory();
+  const history = createBrowserHistory();
 
-  const theme = createTheme({
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: '#2AB083',

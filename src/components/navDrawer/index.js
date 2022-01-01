@@ -18,7 +18,7 @@ import Textsms from "@material-ui/icons/Textsms";
 
 import Box from "@material-ui/core/Box";
 import RouteList from "../listRoutesIcons";
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -69,12 +69,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavDrawer = ({ handleModalOpen }) => {
-  const history = useHistory();
+function NavDrawer () {
+  const [open, setOpen] = useState(false);
+  const history = createBrowserHistory();
   const user = localStorage.getItem("@ifpi/user");
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
   const handleDrawerOpen = (_) => {
     setOpen(true);
   };

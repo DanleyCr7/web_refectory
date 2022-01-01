@@ -2,9 +2,9 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
 import api from '../services/api';
-import { createTheme } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core';
 
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 export const StudentsTable = ({ students, apiData, title }) => {
   const newStudents = students.map(s => {
@@ -14,12 +14,11 @@ export const StudentsTable = ({ students, apiData, title }) => {
       return { ...s, bloqueado: 'não' }
     }
   });
+  
+  
+  const history = createBrowserHistory();
 
-  console.log(newStudents);
-
-  const history = useHistory();
-
-  const theme = createTheme({
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: '#2AB083',

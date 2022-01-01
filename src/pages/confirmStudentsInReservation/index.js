@@ -4,16 +4,16 @@ import api from '../../services/api';
 import { useParams } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
-import { createTheme } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import { createMuiTheme } from '@material-ui/core';
+import { createBrowserHistory } from 'history';
 
 const ConfirmReservationTeacher = () => {
-  const history = useHistory();
+  const history = createBrowserHistory();
   const { id_class, id_reservation } = useParams();
   const [students, setStudents] = useState([]);
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 
-  const theme = createTheme({
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: '#2AB083',
@@ -24,7 +24,7 @@ const ConfirmReservationTeacher = () => {
     },
   });
 
-
+  
   const apiData = async () => {
     try {
       const resp = await api.get(`/students/class/${id_class}`);

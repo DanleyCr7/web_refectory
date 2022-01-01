@@ -29,6 +29,7 @@ import ConfirmStudentsReservations from "./pages/confirmStudentsInReservation";
 import RegisterNutri from "./pages/nutricionista/register";
 import Nutricionistas from "./pages/nutricionista";
 import NutriEdit from "./pages/nutricionista/edit";
+import SearchLuckFilter from "./pages/searchLuckFilter";
 
 const user = JSON.parse(localStorage.getItem("@ifpi/user"));
 
@@ -52,6 +53,7 @@ const Routes = (_) => (
     <Route path="/RegisterNutri" component={RegisterNutri} />
     <Route path="/nutricionistas" component={Nutricionistas} />
     <Route path="/nutri/edit/:id" component={NutriEdit} />
+    <Route path="/searchLuckFilter" component={SearchLuckFilter} />
     <Route path="/students/edit/:id" component={StudentsEdit} />
     <Route path="/courses/edit/:id" component={EditCursos} />
     <Route path="/teachers/edit/:id" component={EditProfessores} />

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core';
 import api from '../../services/api';
 import { useParams } from 'react-router';
-import { useHistory } from 'react-router';
+import { createBrowserHistory } from 'history';
 
 const useStyles = makeStyles({
   button: {
@@ -15,14 +15,14 @@ const useStyles = makeStyles({
     color: '#fff',
     marginTop: 15,
   },
-
+  
   buttonBack: {
     backgroundColor: '#ccc',
     color: 'black',
     marginTop: 15,
     marginLeft: 10,
   },
-
+  
   margin: {
     marginTop: 80,
     paddingLeft: 15
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 });
 
 export default function Confirm() {
-  const history = useHistory();
+  const history = createBrowserHistory();
   const [data, setData] = useState("");
   const { id } = useParams();
   const classes = useStyles();

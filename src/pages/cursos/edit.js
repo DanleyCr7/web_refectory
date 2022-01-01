@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core';
 import api from '../../services/api';
 
-import { useParams, useHistory } from 'react-router-dom'
-
+import { useParams } from 'react-router-dom'
+import { createBrowserHistory } from 'history';
 const useStyles = makeStyles({
   button: {
     backgroundColor: '#17871d',
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 export default function Update() {
   const classes = useStyles();
-  const history = useHistory();
+  const history = createBrowserHistory();
   const { id } = useParams();
 
   const [name, setName] = useState("");

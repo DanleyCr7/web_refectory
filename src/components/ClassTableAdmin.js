@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import MaterialTable from 'material-table';
 import api from '../services/api';
-import {  Button, createTheme, IconButton, Modal } from '@material-ui/core';
+import {  Button, createMuiTheme, IconButton, Modal } from '@material-ui/core';
 import { Cancel } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ClassTableAdmin = ({ classes, apiData, title }) => {
-  const history = useHistory();
+  const history = createBrowserHistory();
 
   const user = JSON.parse(localStorage.getItem('@ifpi/user'));
 

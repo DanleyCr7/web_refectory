@@ -1,12 +1,11 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import { ThemeProvider } from '@material-ui/styles';
-import { createTheme } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { createMuiTheme } from '@material-ui/core';
 
 export const StudentsTableReservationTeacher = ({ students, apiData, title }) => {
 
-  const theme = createTheme({
+  const theme = createMuiTheme({
     palette: {
       primary: {
         main: '#2AB083',

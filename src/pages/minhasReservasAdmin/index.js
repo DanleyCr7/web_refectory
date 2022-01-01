@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MinhasReservasTableAdmin } from '../../components/MinhasReservasTableAdmin';
 import api from '../../services/api';
-import { makeStyles, createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const theme = createTheme({
+const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#2AB083',

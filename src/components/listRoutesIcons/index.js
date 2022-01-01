@@ -8,6 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import LocalDiningIcon from "@material-ui/icons/LocalDining";
+import PictureAsPdf from "@material-ui/icons/PictureAsPdf";
 import Check from "@material-ui/icons/Check";
 import School from "@material-ui/icons/School";
 import LockOpen from "@material-ui/icons/LockOpen";
@@ -47,8 +48,7 @@ export const RouteList = (_) => {
       {user ? (
         <>
           {/* Admin */}
-          {user?.permission === "admin" ||
-            (user?.permission === "nutri" && (
+          {user?.permission === "admin" && (
               <>
                 <Link
                   className={classes.list}
@@ -77,6 +77,20 @@ export const RouteList = (_) => {
                       <LocalDiningIcon />
                     </ListItemIcon>
                     <ListItemText primary="Cardápio" />
+                  </ListItem>
+              </Link>
+              <Link
+                  className={classes.list}
+                  to="/searchLuckFilter"
+                  color="inherit"
+                  underline="none"
+                  component={RouterLink}
+                >
+                  <ListItem>
+                    <ListItemIcon>
+                      <PictureAsPdf />
+                    </ListItemIcon>
+                    <ListItemText primary="Relatório" />
                   </ListItem>
                 </Link>
 
@@ -138,7 +152,7 @@ export const RouteList = (_) => {
                   </ListItem>
                 </Link>
               </>
-            ))}
+            )}
 
           {user?.permission === "professor" && (
             <>
@@ -159,8 +173,7 @@ export const RouteList = (_) => {
             </>
           )}
 
-          {user?.permission === "admin" ||
-            (user?.permission === "nutri" && (
+          {user?.permission === "admin" && (
               <>
                 <Link
                   className={classes.list}
@@ -177,7 +190,7 @@ export const RouteList = (_) => {
                   </ListItem>
                 </Link>
               </>
-            ))}
+            )}
 
           {/* Admin */}
           {user?.permission == "professor" && (
@@ -215,8 +228,7 @@ export const RouteList = (_) => {
           )}
 
           {/* Collapsible de reservas */}
-          {user?.permission === "admin" ||
-            (user?.permission === "nutri" && (
+          {user?.permission === "admin"  && (
               <Link
                 style={{ textDecoration: "none" }}
                 className={classes.collapsible}
@@ -233,11 +245,10 @@ export const RouteList = (_) => {
                   <ListItemText primary="Reservas" />
                 </ListItem>
               </Link>
-            ))}
+            )}
 
           <Collapsible open={collapsibleReserve}>
-            {user?.permission === "admin" ||
-              (user?.permission === "nutri" && (
+            {user?.permission === "admin"  && (
                 <>
                   <Link
                     className={classes.list}
@@ -264,14 +275,13 @@ export const RouteList = (_) => {
                     </ListItem>
                   </Link>
                 </>
-              ))}
+              )}
           </Collapsible>
 
           {/* Collapsible de reservas */}
 
           {/* Collapsible de cadastros */}
-          {user?.permission === "admin" ||
-            (user?.permission === "nutri" && (
+          {user?.permission === "admin"  && (
               <Link
                 style={{ textDecoration: "none" }}
                 className={classes.collapsible}
@@ -288,7 +298,7 @@ export const RouteList = (_) => {
                   <ListItemText primary="Cadastros" />
                 </ListItem>
               </Link>
-            ))}
+            )}
 
           <Collapsible open={collapsibleRegister}>
             <Link

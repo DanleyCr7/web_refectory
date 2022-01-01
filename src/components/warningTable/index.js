@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import MaterialTable from 'material-table'
 import api from '../../services/api';
-import { useHistory } from 'react-router';
+import { createBrowserHistory } from 'history';
 
 import settingsDefaultText from '../../config/settingsText'
 
 export const WarningTable = ({ data, title, apiData }) => {
-  const history = useHistory();
+  const history = createBrowserHistory();
 
   const [state, setState] = useState({
     collumns: [
